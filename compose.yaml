@@ -1,0 +1,31 @@
+# version = "3.9"
+name: boot-postgre-server
+
+services:
+    db-postgre:
+      image: postgres:18.3 
+      container_name: postgres-server
+      ports:
+        - "5432:5432"
+      environment:
+        POSTGRES_USER: myuser
+        POSTGRES_PASSWORD: myuser
+      shm_size: 128mb
+      volumes:
+        - java-db-vol:/var/lib/postgresql
+
+    # http://localhost:8979
+    cloudbeaver:
+      image: dbeaver/cloudbeaver:26.0.1
+      container_name: cloud-beaver
+      ports:
+        - "8979:8978"
+      depends_on:
+        - db-postgre
+      restart: unless-stopped
+      volumes:
+        - cloudbeaver_data:/opt/cloudbeaver/workspace
+
+volumes:
+  java-db-vol:
+  cloudbeaver_data:
