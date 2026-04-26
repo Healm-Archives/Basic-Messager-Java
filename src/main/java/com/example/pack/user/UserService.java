@@ -1,13 +1,15 @@
 package com.example.pack.user;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
         private final UserRepository userRepository;
-        private final UserMapping userMapping;
+        private final UserMapper userMapping;
 
-        public UserService(UserRepository userRepository, UserMapping userMapping) {
+        public UserService(UserRepository userRepository, UserMapper userMapping) {
                 this.userRepository = userRepository;
                 this.userMapping = userMapping;
         }
@@ -26,4 +28,20 @@ public class UserService {
                 return userMapping.userToDto(user);
         }
 
+        public List<UserDto> getAllUserDto(){
+                return userRepository
+                        .findAll()
+                        .stream()
+                        .map(userMapping::userToDto)
+                        .toList();
+        }
+
+        public List<UserDto> getUsersContaining(String name){
+                return userRepository
+                        // .findAllByNameStartsWith(name)
+                        .findByNameStartsWith(name)
+                        .stream()
+                        .map(userMapping::userToDto)
+                        .toList();
+        }
 }

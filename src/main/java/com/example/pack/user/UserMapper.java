@@ -3,7 +3,7 @@ package com.example.pack.user;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserMapping {
+public class UserMapper {
 
         public User dtoToUser(UserDto dto){
                 User user = new User();

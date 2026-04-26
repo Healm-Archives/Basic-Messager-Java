@@ -1,5 +1,7 @@
 package com.example.pack.user;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,5 +37,16 @@ public class UserController {
                 return userService.getUserNameById(userId);
         }
         
+        @GetMapping("/users")
+        public List<UserDto> getUsers() {
+                return userService.getAllUserDto();
+        }
         
+        @GetMapping("/users/{name}")
+        public List<UserDto> getUsersContaining(@PathVariable String name) {
+            return userService.getUsersContaining(name);
+        }
+        
+
+
 }

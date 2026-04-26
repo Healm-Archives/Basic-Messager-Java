@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,11 +28,9 @@ public class Message {
         )
         private String content;
         
-        @OneToOne(
-
-        )
+        @ManyToOne
         @JoinColumn(
-                name = "student_id"
+                name = "user_id"
         )
         private User user;
         
