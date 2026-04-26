@@ -11,8 +11,9 @@ spring:
 
                 # url: jdbc:postgresql://db-postgresql:5432/postgres
                 url: jdbc:postgresql://localhost:5432/postgres
-                username: postgres
-                password: user
+                # ?createDatabaseIfNotExist=true
+                username: myuser
+                password: myuser
 
                 # driver-class-name: com.mysql.cj.jdbc.Driver
 
