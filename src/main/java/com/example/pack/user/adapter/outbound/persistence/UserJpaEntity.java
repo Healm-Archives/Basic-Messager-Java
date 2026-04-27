@@ -1,4 +1,4 @@
-package com.example.pack.user;
+package com.example.pack.user.adapter.outbound.persistence;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @Table(name = "message_user")
-public class User {
+public class UserJpaEntity {
         @Id
         @GeneratedValue
         private Integer id;

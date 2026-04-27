@@ -1,30 +1,33 @@
-package com.example.pack.user;
+package com.example.pack.user.application.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.pack.user.adapter.outbound.persistence.UserJpaEntity;
+import com.example.pack.user.adapter.outbound.persistence.UserRepository;
+import com.example.pack.user.application.dto.UserDto;
+import com.example.pack.user.mapper.UserMapper;
+
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserService {
         private final UserRepository userRepository;
         private final UserMapper userMapping;
 
-        public UserService(UserRepository userRepository, UserMapper userMapping) {
-                this.userRepository = userRepository;
-                this.userMapping = userMapping;
-        }
-
         public void addUser(UserDto userDto){
-                User user = userMapping.dtoToUser(userDto);
+                UserJpaEntity user = userMapping.dtoToUser(userDto);
                 userRepository.save(user);
         }
 
-        public User getUserById(Integer userId){
+        public UserJpaEntity getUserById(Integer userId){
                 return userRepository.getReferenceById(userId);
         }
 
         public UserDto getUserNameById(Integer userId){
-                User user = userRepository.getReferenceById(userId);
+                UserJpaEntity user = userRepository.getReferenceById(userId);
                 return userMapping.userToDto(user);
         }
 
