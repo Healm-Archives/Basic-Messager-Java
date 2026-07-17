@@ -34,11 +34,15 @@ test:
         curl -iG http://localhost:8080/users
         curl -iG -d "userId=1" http://localhost:8080/user
         curl -iG http://localhost:8080/users/healm1
-
         curl -i -X POST http://localhost:8080/user \
                 -H "Content-Type: application/json" \
                 -d '{"name": "healm1"}'
 
+        curl -i -X POST http://localhost:8080/message \
+                -H "Content-Type: application/json" \
+                -d '{"content": "i like pizza", "userId": 1}'
+
+        curl -iG http://localhost:8080/group
 
 add :
         validation
