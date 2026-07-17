@@ -41,3 +41,12 @@ dependencies {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+// to fix implicit mapping in getmapping
+// tasks.withType<JavaCompile> {
+//     options.compilerArgs.add("-parameters")
+// }   
+
+// tasks.withType(JavaCompile).configureEach {
+//     options.compilerArgs += "-parameters"
+// }

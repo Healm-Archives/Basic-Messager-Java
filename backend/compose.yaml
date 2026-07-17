@@ -3,7 +3,7 @@ name: boot-postgre-server
 
 services:
     db-postgre:
-      image: postgres:18.3 
+      image: docker.io/postgres:18.4
       container_name: postgres-server
       ports:
         - "5432:5432"
@@ -16,7 +16,7 @@ services:
 
     # http://localhost:8979
     cloudbeaver:
-      image: dbeaver/cloudbeaver:26.0.1
+      image: docker.io/dbeaver/cloudbeaver:26.1.1
       container_name: cloud-beaver
       ports:
         - "8979:8978"
@@ -28,4 +28,4 @@ services:
 
 volumes:
   java-db-vol:
-  cloudbeaver_data:
+  cloudbeaver_data: 

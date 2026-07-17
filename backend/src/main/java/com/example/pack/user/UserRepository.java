@@ -9,7 +9,7 @@ public interface UserRepository extends JpaRepository<UserJpaEntity, Integer>
         public List<UserJpaEntity> findAll();
 
         // both works
-        // public List<User> findAllByNameStartsWith(String name);
+        // public List<UserJpaEntitys> findAllByNameStartsWith(String name);
         public List<UserJpaEntity> findByNameStartsWith(String name);
 
 }

@@ -43,7 +43,10 @@ public class UserController {
         }
         
         @GetMapping("/users/{name}")
-        public List<UserDto> getUsersContaining(@PathVariable String name) {
+        public List<UserDto> getUsersContaining(
+                // @PathVariable String name
+                @PathVariable("name") String name
+        ) {
             return userService.getUsersContaining(name);
         }
         
