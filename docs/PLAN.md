@@ -33,7 +33,10 @@ command:
                 podman compose -f backend/compose.yaml up 
         
 link:
-        http://localhost:8080
+        java-boot:
+                http://localhost:8080
+        web-react:
+                http://localhost:3000
 
 test:
         curl -iG http://localhost:8080/users
@@ -47,6 +50,10 @@ test:
                 -H "Content-Type: application/json" \
                 -d '{"content": "i like pizza", "userId": 1}'
 
+
+        curl -iG http://localhost:8080/messages
+                = [{"content":"i like pizza","userId":152},{"content":"i like pizza","userId":202}]
+
         curl -iG http://localhost:8080/group
 
 add :
@@ -57,3 +64,16 @@ add :
         modifying, transactional
         specification
         secrets for password
+
+cmd:
+        podman compose -f backend-boot/compose.yaml up 
+
+
+
+
+
+
+
+
+
+(index):1 Access to XMLHttpRequest at 'http://localhost:8080/messages' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
