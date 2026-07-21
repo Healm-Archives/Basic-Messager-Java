@@ -18,8 +18,13 @@ backend:
                 - all user can see whose message is it.
                 
         group:
-                - for now, use only 1 global group
                 - display all message up to most recent
+                - everytime creation of group, store all of its messages to a new table
+                - have a separate table for group metadata
+
+frontend:
+        for now, display all messages from the database
+
 
 ---
 
