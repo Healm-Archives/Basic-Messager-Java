@@ -1,6 +1,17 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: row;
 }
+
+.App-section {
+  width: 50%;
+  height: 20em;
+  background-color: #abbaab;
+  box-sizing: border-box;
+  border: 1em solid #dadaad;
+}
+
 
 .App-logo {
   height: 40vmin;
