@@ -20,7 +20,7 @@ public class GroupController {
 
 
 
-        @GetMapping("/group")
+        @GetMapping("/api/v1/group")
         public List<MessageJpaEntity> getGroupChat(
                 
         ) {

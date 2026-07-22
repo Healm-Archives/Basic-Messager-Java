@@ -21,31 +21,31 @@ public class UserController {
                 this.userService = userService;
         }
 
-        @PostMapping("/user")
+        @PostMapping("/api/v1/user")
         public void addUser(@RequestBody UserDto userDto) {
                 userService.addUser(userDto);
         }
         
-        @GetMapping("/user")
+        @GetMapping("/api/v1/user")
         public UserJpaEntity getUser(
                 @RequestParam("userId") Integer userId
         ) {
                 return userService.getUserById(userId);
         }
         
-        @GetMapping("/user/{user-id}")
+        @GetMapping("/api/v1/user/{user-id}")
         public UserDto getUserNameById(
                 @PathVariable("user-id") Integer userId
         ) {
                 return userService.getUserNameById(userId);
         }
         
-        @GetMapping("/users")
+        @GetMapping("/api/v1/users")
         public List<UserDto> getUsers() {
                 return userService.getAllUserDto();
         }
         
-        @GetMapping("/users/{name}")
+        @GetMapping("/api/v1/users/{name}")
         public List<UserDto> getUsersContaining(
                 // @PathVariable String name
                 @PathVariable("name") String name

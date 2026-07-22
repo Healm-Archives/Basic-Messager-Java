@@ -20,17 +20,17 @@ public class MessageController {
                 this.messageService = messageService;
         }
         
-        @PostMapping("/message")
+        @PostMapping("/api/v1/message")
         public void addMessage(@RequestBody MessageDto dto) {
                 messageService.addMessage(dto);
         }
         
-        @GetMapping("/messages")
+        @GetMapping("/api/v1/messages")
         public List<MessageDto> getMessages() {
             return messageService.getAllMessages();
         }
 
-        @GetMapping("/messages/{user-id}")
+        @GetMapping("/api/v1/messages/{user-id}")
         public List<MessageDto> getAllMessageByUserId(@PathVariable("user-id") Integer id) {
             return messageService.getAllMessageByUserId(id);
         }
