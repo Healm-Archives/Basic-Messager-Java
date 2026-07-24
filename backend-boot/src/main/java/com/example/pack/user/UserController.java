@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @CrossOrigin("*")
 
+@RequestMapping(path = "/api/v1")
 @RestController
 public class UserController {
         private final UserService userService;
@@ -21,33 +23,32 @@ public class UserController {
                 this.userService = userService;
         }
 
-        @PostMapping("/api/v1/user")
+        @PostMapping("/user")
         public void addUser(@RequestBody UserDto userDto) {
                 userService.addUser(userDto);
         }
         
-        @GetMapping("/api/v1/user")
+        @GetMapping("/user")
         public UserJpaEntity getUser(
                 @RequestParam("userId") Integer userId
         ) {
                 return userService.getUserById(userId);
         }
         
-        @GetMapping("/api/v1/user/{user-id}")
+        @GetMapping("/user/{user-id}")
         public UserDto getUserNameById(
                 @PathVariable("user-id") Integer userId
         ) {
                 return userService.getUserNameById(userId);
         }
         
-        @GetMapping("/api/v1/users")
+        @GetMapping("/users")
         public List<UserDto> getUsers() {
                 return userService.getAllUserDto();
         }
         
-        @GetMapping("/api/v1/users/{name}")
+        @GetMapping("/users/{name}")
         public List<UserDto> getUsersContaining(
-                // @PathVariable String name
                 @PathVariable("name") String name
         ) {
             return userService.getUsersContaining(name);

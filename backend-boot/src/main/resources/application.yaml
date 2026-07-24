@@ -24,5 +24,11 @@ spring:
                 show-sql: true
                 open-in-view: true
 
+        web:
+                error:
+                        include-path: always
+                        include-binding-errors: always
+
 server:
         port: 8080
+      

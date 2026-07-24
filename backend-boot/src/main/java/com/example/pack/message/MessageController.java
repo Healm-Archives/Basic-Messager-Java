@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 // only for local setup
 @CrossOrigin("*")
 
 @RestController
+@RequestMapping(path = "/api/v1")
 public class MessageController {
         private final MessageService messageService;
 
@@ -20,17 +22,17 @@ public class MessageController {
                 this.messageService = messageService;
         }
         
-        @PostMapping("/api/v1/message")
+        @PostMapping("/message")
         public void addMessage(@RequestBody MessageDto dto) {
                 messageService.addMessage(dto);
         }
         
-        @GetMapping("/api/v1/messages")
+        @GetMapping("/messages")
         public List<MessageDto> getMessages() {
             return messageService.getAllMessages();
         }
 
-        @GetMapping("/api/v1/messages/{user-id}")
+        @GetMapping("/messages/{user-id}")
         public List<MessageDto> getAllMessageByUserId(@PathVariable("user-id") Integer id) {
             return messageService.getAllMessageByUserId(id);
         }
