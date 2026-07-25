@@ -1,6 +1,8 @@
 package com.example.pack.message;
 
+import java.util.UUID;
+
 public record MessageDto (
         String content,
-        int userId
+        UUID userUuid
 ){}

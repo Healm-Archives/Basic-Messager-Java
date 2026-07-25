@@ -1,6 +1,7 @@
 package com.example.pack.user;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,23 +24,23 @@ public class UserController {
                 this.userService = userService;
         }
 
-        @PostMapping("/user")
-        public void addUser(@RequestBody UserDto userDto) {
-                userService.addUser(userDto);
-        }
+        // @PostMapping("/user")
+        // public void addUser(@RequestBody PrivateUserDto userDto) {
+        //         userService.registerUser(userDto);
+        // }
         
         @GetMapping("/user")
         public UserJpaEntity getUser(
-                @RequestParam("userId") Integer userId
+                @RequestParam("userUuid") UUID userUuid
         ) {
-                return userService.getUserById(userId);
+                return userService.getUserById(userUuid);
         }
         
-        @GetMapping("/user/{user-id}")
+        @GetMapping("/user/{user-uuid}")
         public UserDto getUserNameById(
-                @PathVariable("user-id") Integer userId
+                @PathVariable("user-uuid") UUID userUuid
         ) {
-                return userService.getUserNameById(userId);
+                return userService.getUserNameById(userUuid);
         }
         
         @GetMapping("/users")

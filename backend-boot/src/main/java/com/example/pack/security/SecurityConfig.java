@@ -28,11 +28,13 @@ public class SecurityConfig {
         // }
 
         @Bean
-        private SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
                 return httpSecurity
+                        .csrf(csrf -> csrf.disable())
+
                         .formLogin(httpForm -> {
                                 httpForm.loginPage("/req/login").permitAll();
-                                httpForm.defaultSuccessUrl("/index");
+                                httpForm.defaultSuccessUrl("/");
                                 
                         })
 

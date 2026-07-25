@@ -1,8 +1,11 @@
 package com.example.pack.user;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -15,16 +18,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Table(name = "message_user")
+@Table(name = "m_user")
 public class UserJpaEntity {
         @Id
-        @GeneratedValue
-        private Integer id;
+        @GeneratedValue(strategy = GenerationType.UUID)
+        private UUID uuid;
 
         @Column(
                 unique = true,
                 nullable = false
         )
         private String name;
+
+        private String password;
 
 }

@@ -1,10 +1,13 @@
 package com.example.pack.message;
 
+import java.util.UUID;
+
 import com.example.pack.user.UserJpaEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -22,8 +25,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "message")
 public class MessageJpaEntity {
         @Id
-        @GeneratedValue
-        private Integer id;
+        @GeneratedValue(strategy = GenerationType.UUID)
+        private UUID uuid;
         
         @Column(
                 nullable = false

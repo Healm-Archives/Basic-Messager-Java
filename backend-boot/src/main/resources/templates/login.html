@@ -14,9 +14,9 @@
         
         <form action="/req/login" method="post">
             <h1>Login</h1>
-            <div class="dialog-row">
+            <!-- <div class="dialog-row">
                 <label th:if="${param.error}" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}" class="text-center redText"></label>                   
-            </div>
+            </div> -->
             <div class="inputbox">
                 <ion-icon name="email-outline"></ion-icon>
                 <input name="username" id="username"type="name" required>
@@ -27,9 +27,10 @@
                 <input name="password" type="password" id="password" required>
                 <label for="">Password</label>
             </div>
-            <div class="register">
+            <!-- <div class="register">
                 <p><a href="#">Forget Password ?</a></p>
-            </div>
+            </div> -->
+            <!-- <button id="submit" type="submit">Log in</button> -->
             <button>Log in</button>
             <div class="register">
                 <p>Don't have a account ?<a href="/req/signup"> Register!!</a></p>
@@ -38,3 +39,48 @@
     </section>
 </body>
   
+<!-- <script>
+
+  const submitButttom = document.getElementById("submit");
+  submitButttom.addEventListener('click', async (event) => {
+
+    event.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    // const email = document.getElementById('email').value;
+
+    const data = {
+      "name": username,
+      // email,
+      password
+    }
+      
+    const jsonData = JSON.stringify(data);
+
+    console.log("jsonData");
+    console.log(jsonData);
+    
+    // alert('breakpoint');
+
+    fetch('/req/login2', {
+        method: 'POST',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: jsonData
+    })
+    // .then(response =>{
+    // console.log("response code : ", response.status);
+    
+    // alert('succesfull');
+    //if(response.status == 200){
+        //alert('succesfull');
+        //xs}
+    // });
+    
+    alert('succesfull');
+  })
+
+
+</script> -->

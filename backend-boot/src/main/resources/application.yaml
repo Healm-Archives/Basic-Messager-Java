@@ -1,6 +1,6 @@
 spring:
         application:
-                name: messanging
+                name: messaging
         # profiles:
         #         active:
                         # - demo                        

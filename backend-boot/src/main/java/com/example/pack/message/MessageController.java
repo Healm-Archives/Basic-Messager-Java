@@ -1,6 +1,7 @@
 package com.example.pack.message;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +34,7 @@ public class MessageController {
         }
 
         @GetMapping("/messages/{user-id}")
-        public List<MessageDto> getAllMessageByUserId(@PathVariable("user-id") Integer id) {
+        public List<MessageDto> getAllMessageByUserId(@PathVariable("user-id") UUID id) {
             return messageService.getAllMessageByUserId(id);
         }
         

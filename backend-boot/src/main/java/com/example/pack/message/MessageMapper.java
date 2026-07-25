@@ -8,7 +8,7 @@ import com.example.pack.user.UserJpaEntity;
 public class MessageMapper {
         public MessageJpaEntity dtoToMessage(MessageDto msgDto){
                 UserJpaEntity user = new UserJpaEntity();
-                user.setId(msgDto.userId());
+                user.setUuid(msgDto.userUuid());
                 
                 var message = new MessageJpaEntity();
                 message.setContent(msgDto.content());
@@ -19,7 +19,7 @@ public class MessageMapper {
         public MessageDto toDto(MessageJpaEntity message){
                 return new MessageDto(
                         message.getContent(), 
-                        message.getUser().getId()
+                        message.getUser().getUuid()
                 );
         }
 }

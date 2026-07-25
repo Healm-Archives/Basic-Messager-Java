@@ -1,6 +1,7 @@
 package com.example.pack.message;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,9 @@ public class MessageService {
                         .toList();
         }
 
-        public List<MessageDto> getAllMessageByUserId(Integer id){
+        public List<MessageDto> getAllMessageByUserId(UUID id){
                 return messageRepository
-                        .findAllByUserId(id)
+                        .findAllByUserUuid(id)
                         .stream()
                         .map(messageMapper::toDto)
                         .toList();

@@ -10,6 +10,13 @@ public class UserMapper {
                 user.setName(dto.name());
                 return user;
         }
+
+        public UserJpaEntity privateDtoToUser(PrivateUserDto dto){
+                UserJpaEntity user = new UserJpaEntity();
+                user.setName(dto.name());
+                user.setPassword(dto.password());
+                return user;
+        }
         
         public UserDto userToDto(UserJpaEntity user){
                 return new UserDto(

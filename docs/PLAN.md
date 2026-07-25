@@ -46,6 +46,10 @@ test:
                 -H "Content-Type: application/json" \
                 -d '{"name": "healm1"}'
 
+        curl -i -X POST http://localhost:8080/req/signup \
+                -H "Content-Type: application/json" \
+                -d '{"name": "healm1", "password": "12"}'
+
         curl -i -X POST http://localhost:8080/api/v1/message \
                 -H "Content-Type: application/json" \
                 -d '{"content": "i like pizza", "userId": 1}'
