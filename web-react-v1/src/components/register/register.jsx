@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
 
 const Register = () => {
         
+        const [ errorRegister, setErrorRegister ] = useState();
+
         const OnRegister = async () => {
                 const username = document.getElementById("username").value;
                 const password = document.getElementById("password").value;
@@ -12,16 +14,18 @@ const Register = () => {
                         password
                 };
 
-                const response = await api.post("/signup", 
+                api.post("/signin", 
                         payload,
                         // { 
                         //         headers: {"Content-Type": "application/json"}
                         // }
-                )
-                
-                console.log("response data");
-                console.log(response);
-                console.log(response.data);
+                        )
+                        .then(res => {
+                                setErrorRegister(res.data);
+                        })
+                        .catch(error => {
+                                setErrorRegister(error.response.data);
+                        });
                 
         }
 
@@ -32,6 +36,9 @@ const Register = () => {
         return (
                 <form action={OnRegister}>
                         <h1>Register</h1>
+                        { errorRegister }
+                        <br/>
+                        
                         <label htmlFor="username">Username : </label>
                         <input type="text" id = "username" name = "name"/>
                         <br/>

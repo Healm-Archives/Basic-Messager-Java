@@ -12,11 +12,23 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 function App() {
 
+  const NavBar = () => {
+    return (
+      <div className = "App-section">
+        <a href = "/">Home</a>
+        <br/>
+        <a href = "/login">Login</a>
+        <br/>
+        <a href = "/register">Register</a>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
       <Routes >
 
-        <Route path = "/index" element = {
+        <Route path = "/" element = {
           <>
             <div className = "App-section">
               <div>
@@ -30,26 +42,29 @@ function App() {
               <Message/>
             </div>
 
-            <div className = "App-section">
-              <a href = "/login">Login</a>
-              <br/>
-              <a href = "/register">Register</a>
-            </div>
-
+            <NavBar />
           </>
         } />
 
         <Route path = "/login" element = {
-          <div className = "App-section">
-            <Login/>
-          </div>
+          <>
+            <NavBar />
+
+            <div className = "App-section">
+              <Login/>
+            </div>
+          </>
 
         } />
 
         <Route path = "/register" element = {
-          <div className = "App-section">
-            <Register/>
-          </div>
+          <>
+            <NavBar />
+
+            <div className = "App-section">
+              <Register/>
+            </div>
+          </>
 
         } />
 

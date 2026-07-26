@@ -38,23 +38,17 @@ public class LoginController {
         //         return "signup";
         // }
 
-        @PostMapping("/signup")
+        @PostMapping("/signin")
         // @ResponseBody
         public ResponseEntity<String> signedUp(@RequestBody PrivateUserDto dto) {
-                System.out.println("signin dto: " + dto);
-                loginService.registerUser(dto);
-                return new ResponseEntity<>("Success Sign-in", HttpStatus.OK);
+                return loginService.authenticateRegister(dto);
                 
         }
 
-        @PostMapping("/login2")
+        @PostMapping("/login")
         // @ResponseBody
         public ResponseEntity<String> loggedIn(@RequestBody PrivateUserDto dto) {
-                System.out.println("login :" + dto);
-                
-                loginService.authenticateLogin(dto);
-
-                return new ResponseEntity<>("Success Log in", HttpStatus.OK);
+                return loginService.authenticateLogin(dto);
         }
         
         

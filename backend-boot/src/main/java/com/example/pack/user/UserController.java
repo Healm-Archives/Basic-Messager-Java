@@ -23,11 +23,6 @@ public class UserController {
         public UserController(UserService userService) {
                 this.userService = userService;
         }
-
-        // @PostMapping("/user")
-        // public void addUser(@RequestBody PrivateUserDto userDto) {
-        //         userService.registerUser(userDto);
-        // }
         
         @GetMapping("/user")
         public UserJpaEntity getUser(
