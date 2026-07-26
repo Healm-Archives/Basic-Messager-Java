@@ -1,6 +1,9 @@
 package com.example.pack.user;
 
+import java.security.KeyStore.PrivateKeyEntry;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -14,10 +17,6 @@ public class UserService {
         private final UserRepository userRepository;
         private final UserMapper userMapping;
         
-        public void registerUser(PrivateUserDto userDto){
-                UserJpaEntity user = userMapping.privateDtoToUser(userDto);
-                userRepository.save(user);
-        }
 
         public UserJpaEntity getUserById(UUID userId){
                 return userRepository.getReferenceById(userId);
@@ -44,4 +43,5 @@ public class UserService {
                         .map(userMapping::userToDto)
                         .toList();
         }
+
 }

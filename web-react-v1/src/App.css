@@ -2,6 +2,7 @@
   text-align: center;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .App-section {
@@ -10,6 +11,7 @@
   background-color: #abbaab;
   box-sizing: border-box;
   border: 1em solid #dadaad;
+  justify-items: center;
 }
 
 

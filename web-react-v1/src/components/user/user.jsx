@@ -9,8 +9,8 @@ const User = () => {
                 try 
                 {
                         const response = (await api.get("/users"));
-                        console.log("getUsers");
-                        console.log(response.data);
+                        // console.log("getUsers");
+                        // console.log(response.data);
                         
                         setUsers(response.data);
 

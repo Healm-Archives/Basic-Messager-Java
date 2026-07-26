@@ -18,38 +18,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
-@RequestMapping(path = "/req")
+@RequestMapping(path = "/api/v1")
 public class LoginController {
 
-        private final UserService userService;
 
+        private final LoginService loginService;
 
-        public LoginController(UserService userService) {
-                this.userService = userService;
+        public LoginController(LoginService loginService) {
+                this.loginService = loginService;
         }
 
-        @GetMapping("/login")
-        public String login() {
-                return "login";
-        }
+        // @GetMapping("/login")
+        // public String login() {
+        //         return "login";
+        // }
 
-        @GetMapping("/signup")
-        public String signup() {
-                return "signup";
-        }
+        // @GetMapping("/signup")
+        // public String signup() {
+        //         return "signup";
+        // }
 
         @PostMapping("/signup")
         // @ResponseBody
         public ResponseEntity<String> signedUp(@RequestBody PrivateUserDto dto) {
                 System.out.println("signin dto: " + dto);
-                userService.registerUser(dto);
+                loginService.registerUser(dto);
                 return new ResponseEntity<>("Success Sign-in", HttpStatus.OK);
                 
         }
+
         @PostMapping("/login2")
         // @ResponseBody
         public ResponseEntity<String> loggedIn(@RequestBody PrivateUserDto dto) {
                 System.out.println("login :" + dto);
+                
+                loginService.authenticateLogin(dto);
 
                 return new ResponseEntity<>("Success Log in", HttpStatus.OK);
         }
