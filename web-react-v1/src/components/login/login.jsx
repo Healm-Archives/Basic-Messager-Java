@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import api from "../../api/axiosConfig";
 
 const Login = () => {
@@ -21,12 +21,16 @@ const Login = () => {
                         // }
                 ).then(res => {                        
                         setErrorLogin(res.data);
-                }).catch(error => {
+                        window.location.replace("http://localhost:3000/home")
+                })
+                .catch(error => {
                         if (error.response){
                                 setErrorLogin(error.response.data);
                         }
                         else {
                                 setErrorLogin("Network error");
+                                // console.log(error);
+                                
                         }
                 });
                 
@@ -42,11 +46,11 @@ const Login = () => {
                         { errorLogin }
                         <br/>
                         <label htmlFor="username">Username : </label>
-                        <input type="text" id = "username" name = "name"/>
+                        <input type="text" id = "username" name = "name" required />
                         <br/>
 
                         <label htmlFor="password">Password : </label>
-                        <input type="password" id = "password" name = "password"/>
+                        <input type="password" id = "password" name = "password" required />
                         <br/>
                         <br/>
                         <input type="submit" id="submit" name="submit"/>

@@ -47,7 +47,8 @@ public class SecurityConfig {
                         // })
 
                         .authorizeHttpRequests(registry -> {
-                                registry.requestMatchers("/api/v1/**", "/req/**", "/css/**", "/js/**")
+                                // registry.requestMatchers("/api/v1/**", "/req/**", "/css/**", "/js/**")
+                                registry.requestMatchers("/api/v1/**")
                                         .permitAll()
                                         .anyRequest()
                                         .authenticated();

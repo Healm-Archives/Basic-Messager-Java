@@ -40,11 +40,11 @@ const Register = () => {
                         <br/>
                         
                         <label htmlFor="username">Username : </label>
-                        <input type="text" id = "username" name = "name"/>
+                        <input type="text" id = "username" name = "name" required />
                         <br/>
 
                         <label htmlFor="password">Password : </label>
-                        <input type="password" id = "password" name = "password"/>
+                        <input type="password" id = "password" name = "password" required />
                         <br/>
 
                         <input type="submit" id="submit" name="submit"/>

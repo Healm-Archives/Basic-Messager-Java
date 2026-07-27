@@ -8,18 +8,17 @@ import Message from './components/message/message';
 import User from './components/user/user';
 import Login from './components/login/login';
 import Register from './components/register/register';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Link, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 function App() {
 
   const NavBar = () => {
     return (
       <div className = "App-section">
-        <a href = "/">Home</a>
+        <Link to = "/">Home</Link> |{" "}
+        <Link to = "/login">Login</Link> |{" "}
+        <Link to = "/register">Register</Link>
         <br/>
-        <a href = "/login">Login</a>
-        <br/>
-        <a href = "/register">Register</a>
       </div>
     );
   }
@@ -30,48 +29,32 @@ function App() {
 
         <Route path = "/" element = {
           <>
-            <div className = "App-section">
-              <div>
-                Select user : 
-                <br/>
-                <User />
-              </div>
-            </div>
-            
-            <div className = "App-section">
-              <Message/>
-            </div>
-
             <NavBar />
-          </>
-        } />
-
-        <Route path = "/login" element = {
-          <>
-            <NavBar />
-
             <div className = "App-section">
-              <Login/>
+              <Outlet />
             </div>
           </>
+        }>
 
-        } />
+          <Route index element = {
+            <>                              
+                hello
+            </>
+          } />
 
-        <Route path = "/register" element = {
-          <>
-            <NavBar />
+          <Route path = "/login" element = { <Login/> } />
 
-            <div className = "App-section">
-              <Register/>
-            </div>
-          </>
+          <Route path = "/register" element = { <Register/> } />
 
-        } />
+          <Route path = "/home" element = { 
+            <h1>Hellow</h1> 
+          } />
 
-        <Route path = "*" element = {
-          <Navigate to = "/login" replace/>
+          <Route path = "*" element = {
+            <Navigate to = "/login" replace/>
+          }/>
 
-        }/>
+        </Route>
 
       </Routes>
 
