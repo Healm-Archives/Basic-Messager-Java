@@ -16,5 +16,4 @@ public interface UserRepository extends JpaRepository<UserJpaEntity, UUID>
         // public List<UserJpaEntitys> findAllByNameStartsWith(String name);
         public List<UserJpaEntity> findByNameStartsWith(String name);
         
-
 }

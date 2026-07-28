@@ -1,7 +1,7 @@
 messaging app
 
 backend: spring boot
-frontend: angular?
+frontend: react
 database: postgres
 
 ---
@@ -22,6 +22,14 @@ backend:
                 - everytime creation of group, store all of its messages to a new table
                 - have a separate table for group metadata
 
+        login:
+                - register user
+                - login user
+
+        security:
+                - whitelist url path "/api/v1"
+                - whitelist :3000 (frontend-react-web) in cors
+
 frontend:
         for now, display all messages from the database
 
@@ -40,15 +48,25 @@ link:
 
 test:
         curl -iG http://localhost:8080/api/v1/users
-        curl -iG -d "userId=1" http://localhost:8080/api/v1/user
-        curl -iG http://localhost:8080/api/v1/users/healm1
-        curl -i -X POST http://localhost:8080/api/v1/user \
+
+        curl -iG -d "userUuid=b1141b96-bd62-413f-bcbf-ee4cd0dc008c" http://localhost:8080/api/v1/user
+        
+        curl -iG http://localhost:8080/api/v1/user/aaaaeda0-93b2-4ef9-826b-c51f36ff32ac
+
+        curl -iG http://localhost:8080/api/v1/users/3
+        
+        
+        ======
+        
+        [x] curl -i -X POST http://localhost:8080/api/v1/user \
                 -H "Content-Type: application/json" \
                 -d '{"name": "healm1"}'
 
-        curl -i -X POST http://localhost:8080/req/signin \
+        [x] curl -i -X POST http://localhost:8080/api/v1/signin \
                 -H "Content-Type: application/json" \
                 -d '{"name": "healm1", "password": "12"}'
+
+        ======
 
         curl -i -X POST http://localhost:8080/api/v1/message \
                 -H "Content-Type: application/json" \

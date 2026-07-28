@@ -4,12 +4,14 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 import com.example.pack.user.PrivateUserDto;
 import com.example.pack.user.UserJpaEntity;
 import com.example.pack.user.UserMapper;
 import com.example.pack.user.UserRepository;
 
+import jakarta.validation.ConstraintViolationException;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -28,6 +30,20 @@ public class LoginService {
                 } catch (DataIntegrityViolationException e) {
                         // System.out.println("Duplicate keys");
                         return new ResponseEntity<>("Name already existed", HttpStatus.UNAUTHORIZED);
+                } 
+                catch (TransactionSystemException e){
+                        Throwable root = e.getRootCause();
+
+                        if (root instanceof ConstraintViolationException violation){
+                                String message = violation.getConstraintViolations()
+                                                        .iterator()
+                                                        .next()
+                                                        .getMessage();
+
+                                return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+                        }
+
+                        throw e;
                 }
 
         }
