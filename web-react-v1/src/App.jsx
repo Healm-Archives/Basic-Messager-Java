@@ -1,13 +1,8 @@
-// import logo from './logo.svg';
 import './App.css';
 
-import api from './api/axiosConfig';
-import { useEffect, useState } from 'react';
-
-import Message from './components/message/message';
-import User from './components/user/user';
 import Login from './components/login/login';
 import Register from './components/register/register';
+
 import { Link, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -63,4 +58,4 @@ function App() {
 
 }
 
-export default App;
+export default App

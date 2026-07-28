@@ -1,5 +1,5 @@
 import { useState } from "react";
-import api from "../../api/axiosConfig";
+import api from "../../api/axiosConfig.jsx";
 
 const Login = () => {
         
@@ -59,4 +59,4 @@ const Login = () => {
         );
 };
 
-export default Login;
+export default Login

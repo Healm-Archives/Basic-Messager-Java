@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
 
 const Register = () => {
@@ -53,4 +53,5 @@ const Register = () => {
         );
 };
 
-export default Register;
+export default Register
+

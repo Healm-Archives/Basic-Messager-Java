@@ -26,30 +26,6 @@ public class LoginService {
                 UserJpaEntity user = userMapper.privateDtoToUser(userDto);
                 userRepository.save(user);
                 return new ResponseEntity<>("Success Sign-in", HttpStatus.OK);
-                
-                // try {
-                //         UserJpaEntity user = userMapper.privateDtoToUser(userDto);
-                //         userRepository.save(user);
-                //         return new ResponseEntity<>("Success Sign-in", HttpStatus.OK);
-                        
-                // } catch (DataIntegrityViolationException e) {
-                //         // System.out.println("Duplicate keys");
-                //         return new ResponseEntity<>("Name already existed", HttpStatus.UNAUTHORIZED);
-                // } 
-                // catch (TransactionSystemException e){
-                //         Throwable root = e.getRootCause();
-
-                //         if (root instanceof ConstraintViolationException violation){
-                //                 String message = violation.getConstraintViolations()
-                //                                         .iterator()
-                //                                         .next()
-                //                                         .getMessage();
-
-                //                 return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-                //         }
-
-                //         throw e;
-                // }
 
         }
 

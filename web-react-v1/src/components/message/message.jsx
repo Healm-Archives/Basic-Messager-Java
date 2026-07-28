@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
 
 const Message = () => {
@@ -48,4 +48,4 @@ const Message = () => {
 
 }
 
-export default Message;
+export default Message

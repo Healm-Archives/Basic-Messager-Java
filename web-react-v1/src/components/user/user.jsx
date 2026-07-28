@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
 
 const User = () => {
@@ -43,4 +43,4 @@ const User = () => {
 
 }
 
-export default User;
+export default User
