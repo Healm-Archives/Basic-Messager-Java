@@ -1,7 +1,7 @@
 messaging app
 
 backend: spring boot
-frontend: react
+frontend: vite with react
 database: postgres
 
 ---
@@ -62,7 +62,7 @@ test:
                 -H "Content-Type: application/json" \
                 -d '{"name": "healm1"}'
 
-        [x] curl -i -X POST http://localhost:8080/api/v1/signin \
+        [x] curl -i -X POST http://localhost:8080/api/v1/register \
                 -H "Content-Type: application/json" \
                 -d '{"name": "healm1", "password": "12"}'
 
@@ -99,3 +99,6 @@ cmd:
 
 
 (index):1 Access to XMLHttpRequest at 'http://localhost:8080/messages' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+curl -iG http://localhost:8080/api/v1/users \
+        -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZWFsbSIsImlhdCI6MTc4NTQxODQ3NSwiZXhwIjoxNzg1NDIyMDc1fQ.eo_xu3LVK834CHD-Os3gxVPCt_IpAIqnhMfp4LXoT54"

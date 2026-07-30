@@ -14,7 +14,7 @@ const Register = () => {
                         password
                 };
 
-                api.post("/signin", 
+                api.post("/register", 
                         payload,
                         // { 
                         //         headers: {"Content-Type": "application/json"}

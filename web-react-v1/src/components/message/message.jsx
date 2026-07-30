@@ -11,7 +11,12 @@ const Message = () => {
                 
                 try {
 
-                        const response = await api.get("/messages");
+                        // const response = await api.get("/messages");
+                        const response = await api.get("/users", {
+                                headers: {
+                                        "Authorization": `Bearer ${jwtToken}`
+                                }
+                        });
                         
                         setMessages(response.data);
                         

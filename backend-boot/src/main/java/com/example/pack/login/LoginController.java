@@ -8,18 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.pack.user.PrivateUserDto;
 
+import lombok.RequiredArgsConstructor;
+
 
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping(path = "/api/v1")
 public class LoginController {
 
-
+        // private final CustomUserDetailsService loginService;
         private final LoginService loginService;
-
-        public LoginController(LoginService loginService) {
-                this.loginService = loginService;
-        }
 
         // @GetMapping("/login")
         // public String login() {
@@ -31,7 +30,7 @@ public class LoginController {
         //         return "signup";
         // }
 
-        @PostMapping("/signin")
+        @PostMapping("/register")
         // @ResponseBody
         public ResponseEntity<String> signedUp(@RequestBody PrivateUserDto dto) {
                 return loginService.authenticateRegister(dto);
@@ -40,7 +39,8 @@ public class LoginController {
 
         @PostMapping("/login")
         // @ResponseBody
-        public ResponseEntity<String> loggedIn(@RequestBody PrivateUserDto dto) {
+        // public ResponseEntity<String> loggedIn(@RequestBody PrivateUserDto dto) {
+        public ResponseEntity<LoginResponseDto> loggedIn(@RequestBody PrivateUserDto dto) {
                 return loginService.authenticateLogin(dto);
         }
         

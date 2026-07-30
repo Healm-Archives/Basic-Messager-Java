@@ -1,8 +1,8 @@
 import './App.css';
 
 import Login from './components/login/login';
+import Message from './components/message/message';
 import Register from './components/register/register';
-
 import { Link, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
       </div>
     );
   }
+
 
   return (
     <div className="App">
@@ -42,7 +43,11 @@ function App() {
           <Route path = "/register" element = { <Register/> } />
 
           <Route path = "/home" element = { 
-            <h1>Hellow</h1> 
+            <>
+              <h1>Hello authenticated user</h1> 
+              <p>Message</p>
+              <Message />
+            </>
           } />
 
           <Route path = "*" element = {
