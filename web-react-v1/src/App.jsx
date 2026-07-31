@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import './App.css';
 
+import { Link, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 import Login from './components/login/login';
 import Message from './components/message/message';
 import Register from './components/register/register';
-import { Link, Navigate, Outlet, Route, Routes } from 'react-router-dom';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
 
   return (
+
     <div className="App">
       <Routes >
 
@@ -38,7 +40,7 @@ function App() {
             </>
           } />
 
-          <Route path = "/login" element = { <Login/> } />
+          <Route path = "/login" element = { <Login /> } />
 
           <Route path = "/register" element = { <Register/> } />
 
@@ -59,6 +61,7 @@ function App() {
       </Routes>
 
     </div>
+
   );
 
 }

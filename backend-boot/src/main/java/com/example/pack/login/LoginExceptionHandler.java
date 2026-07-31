@@ -19,22 +19,22 @@ public class LoginExceptionHandler {
                 return new ResponseEntity<>("Duplicate entry", HttpStatus.CONFLICT);
         }
 
-        @ExceptionHandler(TransactionSystemException.class)
-        public ResponseEntity<List<String>> handleTransactionException(TransactionSystemException e){
-                Throwable rootCause = e.getRootCause();
+        // @ExceptionHandler(TransactionSystemException.class)
+        // public ResponseEntity<List<String>> handleTransactionException(TransactionSystemException e){
+        //         Throwable rootCause = e.getRootCause();
                 
-                if (rootCause instanceof ConstraintViolationException violation) {
-                        List<String> message = violation.getConstraintViolations()
-                                .stream()
-                                .map(v -> v.getMessage())
-                                .toList();
+        //         if (rootCause instanceof ConstraintViolationException violation) {
+        //                 List<String> message = violation.getConstraintViolations()
+        //                         .stream()
+        //                         .map(v -> v.getMessage())
+        //                         .toList();
 
-                        // return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-                        return ResponseEntity.badRequest().body(message);
-                }
+        //                 // return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        //                 return ResponseEntity.badRequest().body(message);
+        //         }
 
-                return new ResponseEntity<>(List.of("Unhandled exception"), HttpStatus.INTERNAL_SERVER_ERROR);
-                // return ResponseEntity.internalServerError().build();
+        //         return new ResponseEntity<>(List.of("Unhandled exception"), HttpStatus.INTERNAL_SERVER_ERROR);
+        //         // return ResponseEntity.internalServerError().build();
 
-        }
+        // }
 }

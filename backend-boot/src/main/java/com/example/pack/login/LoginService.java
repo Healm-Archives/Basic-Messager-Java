@@ -36,11 +36,10 @@ public class LoginService {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
 
                 userRepository.save(user);
-                return new ResponseEntity<>("Success Sign-in", HttpStatus.OK);
+                return ResponseEntity.ok("Success Sign-in");
 
         }
 
-        // public ResponseEntity<String> authenticateLogin(PrivateUserDto dto){
         public ResponseEntity<LoginResponseDto> authenticateLogin(PrivateUserDto dto){
                 try {
                         Authentication authentication = authenticationManager.authenticate(
@@ -55,8 +54,7 @@ public class LoginService {
                         UserDetails user = (UserDetails) authentication.getPrincipal();
                         String token = jwtService.generateToken(user);
                         
-                        System.out.println("Bearer " + token);
-                        // return ResponseEntity.ok("Successful login");
+                        // System.out.println("Bearer " + token);
                         return ResponseEntity.ok(new LoginResponseDto(token, "Successful login"));
                 }
                 catch (AuthenticationException e){
@@ -64,7 +62,6 @@ public class LoginService {
                         return ResponseEntity
                                 .status(HttpStatus.UNAUTHORIZED)
                                 .body(new LoginResponseDto("", "Bad Credential"));
-                        // return new ResponseEntity<String>("Bad Credential", HttpStatus.UNAUTHORIZED);
                 }
                 
         }

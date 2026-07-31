@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
+import { useAuth } from "../auth/authConfig";
 
 const Message = () => {
+
+        const { token } = useAuth();
 
         const [messages, setMessages] = useState([]);
         
@@ -12,13 +15,17 @@ const Message = () => {
                 try {
 
                         // const response = await api.get("/messages");
+                        // console.log("Jwt token : " + jwtToken);
+                        
+                        // const response = await api.get("/messages", {
                         const response = await api.get("/users", {
                                 headers: {
-                                        "Authorization": `Bearer ${jwtToken}`
+                                        Authorization: `Bearer ${token}`
                                 }
                         });
                         
                         setMessages(response.data);
+                        console.log(response.data);
                         
                 } 
                 

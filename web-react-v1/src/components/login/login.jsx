@@ -1,16 +1,31 @@
 import { useState } from "react";
-import { redirect } from "react-router-dom";
+import { redirect, useActionData, useNavigate } from "react-router-dom";
 import api from "../../api/axiosConfig.jsx";
+import { useAuth } from "../auth/authConfig.jsx";
+
+// export const action = async ({request}) => {
+//         const formData = await request.formData;
+//         const user = await Login(formData);
+
+//         if (!user) {
+//                 return { error: "invalid credentials"};
+//         }
+
+//         return redirect("/home");
+// };
 
 const Login = () => {
         
+        // const actionData = useActionData();
+
+        const navigate = useNavigate();
+
+        const { setToken } = useAuth();
+
         const [ errorLogin, setErrorLogin ] = useState();
         
         const [ username, setUsername ] = useState();
         const [ password, setPassword ] = useState();
-
-        // const [ token, setToken ] = useState();
-        let token = "";
 
         const handleUsername = (e) => {
                 setUsername(e.target.value);
@@ -19,7 +34,7 @@ const Login = () => {
         const handlePassword = (e) => {
                 setPassword(e.target.value);
         };
-
+        
         const OnLogin = async () => {
 
                 const payload = {
@@ -29,41 +44,26 @@ const Login = () => {
 
                 await api.post("/login", 
                         payload,
-                        // { 
-                        //         headers: {"Content-Type": "application/json"}
-                        // }
                 ).then(res => {                        
+
                         setErrorLogin(res.data.message);
-                        
-                        // console.log(res.data.token);
-                        token = res.data.token;
+;
+                        setToken(res.data.token);
 
                         // window.location.replace("http://localhost:3000/home");
-                        redirect("/home");
+                        // return redirect("/home");
+                        navigate("/home");
                 })
                 .catch(error => {
                         if (error.response){
-                                // setErrorLogin(error.response.data);
                                 setErrorLogin(error.response.data.message);
                         }
                         else {
                                 setErrorLogin("Network error");
-                                // console.log(error);
+                                console.log(error);
                                 
                         }
                 });
-
-                // let token = myresponse.data.token;
-
-                console.log("Token", token);
-
-                const myusers = await api.get("/users", {
-                        headers: {
-                                Authorization: `Bearer ${token}`
-                        }
-                });
-
-                console.log(myusers);
 
         }
 

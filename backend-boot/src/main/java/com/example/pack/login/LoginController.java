@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(path = "/api/v1")
 public class LoginController {
 
-        // private final CustomUserDetailsService loginService;
         private final LoginService loginService;
 
         // @GetMapping("/login")
@@ -39,7 +38,6 @@ public class LoginController {
 
         @PostMapping("/login")
         // @ResponseBody
-        // public ResponseEntity<String> loggedIn(@RequestBody PrivateUserDto dto) {
         public ResponseEntity<LoginResponseDto> loggedIn(@RequestBody PrivateUserDto dto) {
                 return loginService.authenticateLogin(dto);
         }
