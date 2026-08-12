@@ -1,46 +1,46 @@
-import { useEffect, useState } from "react";
-import api from "../../api/axiosConfig";
+// import { useEffect, useState } from "react";
+// import api from "../../api/axiosConfig";
 
-const User = () => {
-        const [users, setUsers] = useState([]);
+// const User = () => {
+//         const [users, setUsers] = useState([]);
 
-        const getUsers = async () => {
+//         const getUsers = async () => {
 
-                try 
-                {
-                        const response = (await api.get("/users"));
-                        // console.log("getUsers");
-                        // console.log(response.data);
+//                 try 
+//                 {
+//                         const response = (await api.get("/users"));
+//                         // console.log("getUsers");
+//                         // console.log(response.data);
                         
-                        setUsers(response.data);
+//                         setUsers(response.data);
 
-                } 
-                catch (error) 
-                {
-                        console.log("eRror", error);
-                }
+//                 } 
+//                 catch (error) 
+//                 {
+//                         console.log("eRror", error);
+//                 }
 
-        }
+//         }
 
-        useEffect(() => {
-                getUsers();
-        }, []);
+//         useEffect(() => {
+//                 getUsers();
+//         }, []);
 
-        const user = users.map((val, i) => {
-                return (
-                        <div key={"userId-" + i}>
-                                {val.name}
-                                <br/>
-                        </div>
-                );
-        });
+//         const user = users.map((val, i) => {
+//                 return (
+//                         <div key={"userId-" + i}>
+//                                 {val.name}
+//                                 <br/>
+//                         </div>
+//                 );
+//         });
 
-        return (
-                <>
-                        {user}
-                </>
-        );
+//         return (
+//                 <>
+//                         {user}
+//                 </>
+//         );
 
-}
+// }
 
-export default User
+// export default User

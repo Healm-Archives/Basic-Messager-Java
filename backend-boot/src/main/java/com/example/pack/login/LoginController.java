@@ -6,8 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.pack.user.PrivateUserDto;
-
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 
@@ -31,14 +30,14 @@ public class LoginController {
 
         @PostMapping("/register")
         // @ResponseBody
-        public ResponseEntity<String> signedUp(@RequestBody PrivateUserDto dto) {
+        public ResponseEntity<String> signUp(@Valid @RequestBody LoginUserDto dto) {
                 return loginService.authenticateRegister(dto);
                 
         }
 
         @PostMapping("/login")
         // @ResponseBody
-        public ResponseEntity<LoginResponseDto> loggedIn(@RequestBody PrivateUserDto dto) {
+        public ResponseEntity<LoginResponseDto> logIn(@Valid @RequestBody LoginUserDto dto) {
                 return loginService.authenticateLogin(dto);
         }
         

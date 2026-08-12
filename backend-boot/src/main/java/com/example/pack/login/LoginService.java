@@ -1,17 +1,14 @@
 package com.example.pack.login;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.pack.security.JwtService;
-import com.example.pack.user.PrivateUserDto;
 import com.example.pack.user.UserJpaEntity;
 import com.example.pack.user.UserMapper;
 import com.example.pack.user.UserRepository;
@@ -30,39 +27,32 @@ public class LoginService {
 
         private final PasswordEncoder passwordEncoder;
 
-        public ResponseEntity<String> authenticateRegister(PrivateUserDto userDto){
+        public ResponseEntity<String> authenticateRegister(LoginUserDto userDto){
                 
                 UserJpaEntity user = userMapper.privateDtoToUser(userDto);
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
+                // user.setPassword(user.getPassword());
 
                 userRepository.save(user);
                 return ResponseEntity.ok("Success Sign-in");
 
         }
 
-        public ResponseEntity<LoginResponseDto> authenticateLogin(PrivateUserDto dto){
-                try {
-                        Authentication authentication = authenticationManager.authenticate(
-                                new UsernamePasswordAuthenticationToken(
-                                        dto.name(), 
-                                        dto.password()
-                                )
-                        );
-        
-                        // System.out.println("Authenticated: " + authentication.isAuthenticated());
+        public ResponseEntity<LoginResponseDto> authenticateLogin(LoginUserDto dto){
+                Authentication authentication = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                dto.name(), 
+                                dto.password()
+                        )
+                );
 
-                        UserDetails user = (UserDetails) authentication.getPrincipal();
-                        String token = jwtService.generateToken(user);
-                        
-                        // System.out.println("Bearer " + token);
-                        return ResponseEntity.ok(new LoginResponseDto(token, "Successful login"));
-                }
-                catch (AuthenticationException e){
-                        // System.out.println("Error : " + e.getMessage());
-                        return ResponseEntity
-                                .status(HttpStatus.UNAUTHORIZED)
-                                .body(new LoginResponseDto("", "Bad Credential"));
-                }
+                // System.out.println("Authenticated: " + authentication.isAuthenticated());
+
+                UserDetails user = (UserDetails) authentication.getPrincipal();
+                String token = jwtService.generateToken(user);
+                
+                // System.out.println("Bearer " + token);
+                return ResponseEntity.ok(new LoginResponseDto(token, "Successful login"));
                 
         }
 }

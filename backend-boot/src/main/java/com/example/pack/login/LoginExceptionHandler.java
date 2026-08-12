@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,22 +20,29 @@ public class LoginExceptionHandler {
                 return new ResponseEntity<>("Duplicate entry", HttpStatus.CONFLICT);
         }
 
-        // @ExceptionHandler(TransactionSystemException.class)
-        // public ResponseEntity<List<String>> handleTransactionException(TransactionSystemException e){
-        //         Throwable rootCause = e.getRootCause();
+        @ExceptionHandler(TransactionSystemException.class)
+        public ResponseEntity<List<String>> handleTransactionException(TransactionSystemException e){
+                Throwable rootCause = e.getRootCause();
                 
-        //         if (rootCause instanceof ConstraintViolationException violation) {
-        //                 List<String> message = violation.getConstraintViolations()
-        //                         .stream()
-        //                         .map(v -> v.getMessage())
-        //                         .toList();
+                if (rootCause instanceof ConstraintViolationException violation) {
+                        List<String> message = violation.getConstraintViolations()
+                                .stream()
+                                .map(v -> v.getMessage())
+                                .toList();
 
-        //                 // return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-        //                 return ResponseEntity.badRequest().body(message);
-        //         }
+                        // return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+                        return ResponseEntity.badRequest().body(message);
+                }
 
-        //         return new ResponseEntity<>(List.of("Unhandled exception"), HttpStatus.INTERNAL_SERVER_ERROR);
-        //         // return ResponseEntity.internalServerError().build();
+                return new ResponseEntity<>(List.of("Unhandled exception"), HttpStatus.INTERNAL_SERVER_ERROR);
+                // return ResponseEntity.internalServerError().build();
 
-        // }
+        }
+        
+        @ExceptionHandler(AuthenticationException.class)
+        public ResponseEntity<LoginResponseDto> handleBadLogin(AuthenticationException e){
+                return ResponseEntity
+                        .status(HttpStatus.UNAUTHORIZED)
+                        .body(new LoginResponseDto("", "Bad Credential"));
+        }
 }

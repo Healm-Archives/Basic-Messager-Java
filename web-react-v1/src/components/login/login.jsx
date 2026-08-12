@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { redirect, useActionData, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../../api/axiosConfig.jsx";
 import { useAuth } from "../auth/authConfig.jsx";
 
@@ -11,35 +11,33 @@ import { useAuth } from "../auth/authConfig.jsx";
 //                 return { error: "invalid credentials"};
 //         }
 
-//         return redirect("/home");
+//         return redirect("/");
 // };
 
 const Login = () => {
-        
-        // const actionData = useActionData();
 
         const navigate = useNavigate();
 
-        const { setToken } = useAuth();
+        const { setToken, setUsername } = useAuth();
 
         const [ errorLogin, setErrorLogin ] = useState();
         
-        const [ username, setUsername ] = useState();
-        const [ password, setPassword ] = useState();
+        const [ loginUsername, setLoginUsername ] = useState();
+        const [ loginPassword, setLoginPassword ] = useState();
 
         const handleUsername = (e) => {
-                setUsername(e.target.value);
+                setLoginUsername(e.target.value);
         };
 
         const handlePassword = (e) => {
-                setPassword(e.target.value);
+                setLoginPassword(e.target.value);
         };
         
         const OnLogin = async () => {
 
                 const payload = {
-                        name: username,
-                        password
+                        name: loginUsername,
+                        password: loginPassword
                 };
 
                 await api.post("/login", 
@@ -49,9 +47,7 @@ const Login = () => {
                         setErrorLogin(res.data.message);
 ;
                         setToken(res.data.token);
-
-                        // window.location.replace("http://localhost:3000/home");
-                        // return redirect("/home");
+                        setUsername(loginUsername);
                         navigate("/home");
                 })
                 .catch(error => {
@@ -67,10 +63,6 @@ const Login = () => {
 
         }
 
-        // useEffect(() => {
-
-        // });
-
         return (
                 <form action={OnLogin}>
                         <h1>Login</h1>
@@ -81,7 +73,7 @@ const Login = () => {
                                 type="text" 
                                 id = "username" 
                                 name = "name" 
-                                value = {username} 
+                                value = {loginUsername} 
                                 onChange = {handleUsername}
                                 required />
                         <br/>
@@ -91,7 +83,7 @@ const Login = () => {
                                 type="password" 
                                 id = "password" 
                                 name = "password" 
-                                value = {password} 
+                                value = {loginPassword} 
                                 onChange = {handlePassword}
                                 required />
                         <br/>

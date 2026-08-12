@@ -27,14 +27,13 @@ public class UserJpaEntity {
         @GeneratedValue(strategy = GenerationType.UUID)
         private UUID uuid;
 
-        @NotBlank(message = "Please fill a name")
         @Column(
                 unique = true,
                 nullable = false
         )
         private String name;
         
-        @Size(min = 3, message = "Password must be at least 6 characters")
+        // @Size(min = 6, message = "Password must be at least 6 characters")
         private String password;
 
 }

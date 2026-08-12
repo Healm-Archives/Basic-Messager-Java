@@ -24,31 +24,31 @@ public class UserController {
                 this.userService = userService;
         }
         
-        @GetMapping("/user")
-        public UserJpaEntity getUser(
-                @RequestParam("userUuid") UUID userUuid
-        ) {
-                return userService.getUserById(userUuid);
-        }
+        // @GetMapping("/user")
+        // public UserJpaEntity getUser(
+        //         @RequestParam("userUuid") UUID userUuid
+        // ) {
+        //         return userService.getUserById(userUuid);
+        // }
         
-        @GetMapping("/user/{user-uuid}")
-        public UserDto getUserNameById(
-                @PathVariable("user-uuid") UUID userUuid
-        ) {
-                return userService.getUserNameById(userUuid);
-        }
+        // @GetMapping("/user/{user-uuid}")
+        // public UserDto getUserNameById(
+        //         @PathVariable("user-uuid") UUID userUuid
+        // ) {
+        //         return userService.getUserNameById(userUuid);
+        // }
         
         @GetMapping("/users")
         public List<UserDto> getUsers() {
                 return userService.getAllUserDto();
         }
         
-        @GetMapping("/users/{name}")
-        public List<UserDto> getUsersContaining(
-                @PathVariable("name") String name
-        ) {
-            return userService.getUsersContaining(name);
-        }
+        // @GetMapping("/users/{name}")
+        // public List<UserDto> getUsersContaining(
+        //         @PathVariable("name") String name
+        // ) {
+        //     return userService.getUsersContaining(name);
+        // }
         
 
 

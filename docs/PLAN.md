@@ -8,7 +8,7 @@ database: postgres
 
 backend:
         user:
-                service user, 
+                - service user, 
                 - can send and receive message from all users including self
                 - customize self profile (name, image)
 
@@ -29,10 +29,15 @@ backend:
         security:
                 - whitelist url path "/api/v1"
                 - whitelist :3000 (frontend-react-web) in cors
+                - csrf disabled
 
 frontend:
         for now, display all messages from the database
 
+---
+TO-DO:
+        - group interface frontend, db, new table
+        - edit group metadata (group profile, name, desc, members)
 
 ---
 
@@ -89,7 +94,7 @@ add :
 
 cmd:
         podman compose -f backend-boot/compose.yaml up 
-
+        npm run dev
 
 
 

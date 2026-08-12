@@ -2,6 +2,8 @@ package com.example.pack.user;
 
 import org.springframework.stereotype.Service;
 
+import com.example.pack.login.LoginUserDto;
+
 @Service
 public class UserMapper {
 
@@ -11,7 +13,7 @@ public class UserMapper {
                 return user;
         }
 
-        public UserJpaEntity privateDtoToUser(PrivateUserDto dto){
+        public UserJpaEntity privateDtoToUser(LoginUserDto dto){
                 UserJpaEntity user = new UserJpaEntity();
                 user.setName(dto.name());
                 user.setPassword(dto.password());

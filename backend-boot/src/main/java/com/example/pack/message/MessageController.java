@@ -23,20 +23,20 @@ public class MessageController {
                 this.messageService = messageService;
         }
         
-        @PostMapping("/message")
-        public void addMessage(@RequestBody MessageDto dto) {
-                messageService.addMessage(dto);
-        }
+        // @PostMapping("/message")
+        // public void addMessage(@RequestBody MessageDto dto) {
+        //         messageService.addMessage(dto);
+        // }
         
-        @GetMapping("/messages")
-        public List<MessageDto> getMessages() {
-            return messageService.getAllMessages();
-        }
+        // @GetMapping("/messages")
+        // public List<MessageDto> getMessages() {
+        //     return messageService.getAllMessages();
+        // }
 
-        @GetMapping("/messages/{user-id}")
-        public List<MessageDto> getAllMessageByUserId(@PathVariable("user-id") UUID id) {
-            return messageService.getAllMessageByUserId(id);
-        }
+        // @GetMapping("/messages/{user-id}")
+        // public List<MessageDto> getAllMessageByUserId(@PathVariable("user-id") UUID id) {
+        //     return messageService.getAllMessageByUserId(id);
+        // }
         
 
 }
