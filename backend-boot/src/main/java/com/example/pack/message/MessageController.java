@@ -11,17 +11,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
+
 // only for local setup
 // @CrossOrigin("*")
 
 @RestController
 @RequestMapping(path = "/api/v1")
+@RequiredArgsConstructor
 public class MessageController {
         private final MessageService messageService;
-
-        public MessageController(MessageService messageService) {
-                this.messageService = messageService;
-        }
         
         // @PostMapping("/message")
         // public void addMessage(@RequestBody MessageDto dto) {

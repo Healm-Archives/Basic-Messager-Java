@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import api from "../../api/axiosConfig";
 
 const Register = () => {
@@ -14,18 +14,15 @@ const Register = () => {
                         password
                 };
 
-                api.post("/register", 
-                        payload,
-                        // { 
-                        //         headers: {"Content-Type": "application/json"}
-                        // }
-                        )
-                        .then(res => {
-                                setErrorRegister(res.data);
-                        })
-                        .catch(error => {
-                                setErrorRegister(error.response.data);
-                        });
+                api.post("/register", payload
+                )
+                .then(res => {
+
+                        setErrorRegister(res.data.message);
+                })
+                .catch(error => {
+                        setErrorRegister(error.response.data.message);
+                });
                 
         }
 

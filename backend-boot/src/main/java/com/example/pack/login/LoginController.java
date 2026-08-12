@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.pack.global.GlobalResponseDto;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -22,7 +24,7 @@ public class LoginController {
         // public String login() {
         //         return "login";
         // }
-
+        
         // @GetMapping("/signup")
         // public String signup() {
         //         return "signup";
@@ -30,14 +32,14 @@ public class LoginController {
 
         @PostMapping("/register")
         // @ResponseBody
-        public ResponseEntity<String> signUp(@Valid @RequestBody LoginUserDto dto) {
+        public ResponseEntity<GlobalResponseDto> signUp(@Valid @RequestBody LoginUserDto dto) {
                 return loginService.authenticateRegister(dto);
                 
         }
 
         @PostMapping("/login")
         // @ResponseBody
-        public ResponseEntity<LoginResponseDto> logIn(@Valid @RequestBody LoginUserDto dto) {
+        public ResponseEntity<ResponseLoginDto> logIn(@Valid @RequestBody LoginUserDto dto) {
                 return loginService.authenticateLogin(dto);
         }
         

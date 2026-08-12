@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestClient.ResponseSpec;
+
+import com.example.pack.global.GlobalResponseDto;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -31,9 +31,9 @@ public class GroupController {
         }
         
         @PostMapping("/group")
-        public ResponseEntity<String> createGroup(@Valid @RequestBody GroupDto dto) {
+        public ResponseEntity<GlobalResponseDto> createGroup(@Valid @RequestBody GroupDto dto) {
                 groupService.createGroup(dto);
-                return ResponseEntity.ok("Group Created Successfully");
+                return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Created Successfully")));
         }
         
 
