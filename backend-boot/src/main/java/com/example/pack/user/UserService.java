@@ -1,9 +1,6 @@
 package com.example.pack.user;
 
-import java.security.KeyStore.PrivateKeyEntry;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -37,7 +34,6 @@ public class UserService {
 
         public List<UserDto> getUsersContaining(String name){
                 return userRepository
-                        // .findAllByNameStartsWith(name)
                         .findByNameStartsWith(name)
                         .stream()
                         .map(userMapping::userToDto)

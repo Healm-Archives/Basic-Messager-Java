@@ -1,5 +1,7 @@
 package com.example.pack.login;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.pack.global.GlobalResponseDto;
 import com.example.pack.security.JwtService;
 import com.example.pack.user.UserJpaEntity;
 import com.example.pack.user.UserMapper;
@@ -27,18 +30,17 @@ public class LoginService {
 
         private final PasswordEncoder passwordEncoder;
 
-        public ResponseEntity<String> authenticateRegister(LoginUserDto userDto){
+        public ResponseEntity<GlobalResponseDto> authenticateRegister(LoginUserDto userDto){
                 
                 UserJpaEntity user = userMapper.privateDtoToUser(userDto);
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
-                // user.setPassword(user.getPassword());
 
                 userRepository.save(user);
-                return ResponseEntity.ok("Success Sign-in");
+                return ResponseEntity.ok(new GlobalResponseDto(List.of("Success Sign-in")));
 
         }
 
-        public ResponseEntity<LoginResponseDto> authenticateLogin(LoginUserDto dto){
+        public ResponseEntity<ResponseLoginDto> authenticateLogin(LoginUserDto dto){
                 Authentication authentication = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(
                                 dto.name(), 
@@ -52,7 +54,7 @@ public class LoginService {
                 String token = jwtService.generateToken(user);
                 
                 // System.out.println("Bearer " + token);
-                return ResponseEntity.ok(new LoginResponseDto(token, "Successful login"));
+                return ResponseEntity.ok(new ResponseLoginDto(token, List.of("Successful login")));
                 
         }
 }

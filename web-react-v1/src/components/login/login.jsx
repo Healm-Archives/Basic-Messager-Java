@@ -48,11 +48,13 @@ const Login = () => {
 ;
                         setToken(res.data.token);
                         setUsername(loginUsername);
+
                         navigate("/home");
                 })
                 .catch(error => {
                         if (error.response){
                                 setErrorLogin(error.response.data.message);
+                                console.log(error.response);
                         }
                         else {
                                 setErrorLogin("Network error");

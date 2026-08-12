@@ -8,8 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,8 +30,6 @@ public class UserJpaEntity {
                 nullable = false
         )
         private String name;
-        
-        // @Size(min = 6, message = "Password must be at least 6 characters")
-        private String password;
 
+        private String password;
 }

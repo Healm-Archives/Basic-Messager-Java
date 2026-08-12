@@ -10,18 +10,23 @@ import org.springframework.transaction.TransactionSystemException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.example.pack.global.GlobalResponseDto;
+
 import jakarta.validation.ConstraintViolationException;
 
 @RestControllerAdvice(assignableTypes = {LoginController.class})
 public class LoginExceptionHandler {
         
         @ExceptionHandler(DataIntegrityViolationException.class)
-        public ResponseEntity<String> handleDuplicate(DataIntegrityViolationException e){
-                return new ResponseEntity<>("Duplicate entry", HttpStatus.CONFLICT);
+        public ResponseEntity<GlobalResponseDto> handleDuplicate(DataIntegrityViolationException e){
+
+                return ResponseEntity
+                        .status(HttpStatus.CONFLICT)
+                        .body(new GlobalResponseDto(List.of("Duplicate Entry")));
         }
 
         @ExceptionHandler(TransactionSystemException.class)
-        public ResponseEntity<List<String>> handleTransactionException(TransactionSystemException e){
+        public ResponseEntity<GlobalResponseDto> handleTransactionException(TransactionSystemException e){
                 Throwable rootCause = e.getRootCause();
                 
                 if (rootCause instanceof ConstraintViolationException violation) {
@@ -30,19 +35,21 @@ public class LoginExceptionHandler {
                                 .map(v -> v.getMessage())
                                 .toList();
 
-                        // return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-                        return ResponseEntity.badRequest().body(message);
+                        GlobalResponseDto dto = new GlobalResponseDto(message);
+
+                        return ResponseEntity.badRequest().body(dto);
                 }
 
-                return new ResponseEntity<>(List.of("Unhandled exception"), HttpStatus.INTERNAL_SERVER_ERROR);
-                // return ResponseEntity.internalServerError().build();
+                return ResponseEntity.internalServerError().body(
+                        new GlobalResponseDto(List.of("Unhandled Exception"))
+                );
 
         }
         
         @ExceptionHandler(AuthenticationException.class)
-        public ResponseEntity<LoginResponseDto> handleBadLogin(AuthenticationException e){
+        public ResponseEntity<ResponseLoginDto> handleBadLogin(AuthenticationException e){
                 return ResponseEntity
                         .status(HttpStatus.UNAUTHORIZED)
-                        .body(new LoginResponseDto("", "Bad Credential"));
+                        .body(new ResponseLoginDto("", List.of("Bad Credential")));
         }
 }

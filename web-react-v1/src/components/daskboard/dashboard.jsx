@@ -2,34 +2,46 @@ import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
 import { useAuth } from "../auth/authConfig";
 import { useNavigate } from "react-router-dom";
+import GroupCreation from "../group/creation/groupCreation";
 
 const Dashboard = () => {
 
         const { token, username } = useAuth();
-
         const navigate = useNavigate();
-
         const [groups, setGroups] = useState([]);
-        
+
         const getGroups = async () => {
         
-                try {
-                        const response = await api.get("/groups", {
-                                headers: {
-                                        Authorization: `Bearer ${token}`
-                                }
-                        });
+                // try {
+                //         const response = await api.get("/groups", {
+                //                 headers: {
+                //                         Authorization: `Bearer ${token}`
+                //                 }
+                //         });
                         
-                        setGroups(response.data);
-                        console.log(response.data);
+                //         setGroups(response.data);
+                //         console.log(response.data);
                         
-                } 
+                // } 
                 
-                catch (error) 
-                {
+                // catch (error) 
+                // {
+                //         console.log("eRror" + error);
+                // }
+
+                await api.get("/groups", {
+                        headers: {
+                                Authorization: `Bearer ${token}`
+                        }
+                })
+                .then(res => {
+                        setGroups(res.data);
+                        console.log(res.data);
+                })
+                .catch(error => {
                         console.log("eRror" + error);
-                }
-        
+                });
+
         };
         
         useEffect(() => {
@@ -39,25 +51,6 @@ const Dashboard = () => {
                 }
                 getGroups();
         }, []);
-
-        const OnCreateGroup = async () => {
-                const payload = {
-                        name: document.getElementById("name").value
-                }
-
-                await api.post("/group", payload, {
-                        headers: {
-                                Authorization: `Bearer ${token}`
-                        }
-                })
-                .then(res => {
-                        console.log(res);
-                        
-                }).catch(error => {
-                        console.log(error);
-                        
-                });
-        }
 
         const groupListSection = groups.map(group => {
                 return (
@@ -78,19 +71,7 @@ const Dashboard = () => {
                 create new group
                 <br/>
                 <br/>
-                <form action = {OnCreateGroup}>
-                        <label htmlFor="groupName">Group name : </label>
-                        <input 
-                                type = "text" 
-                                name = "groupName" 
-                                id = "name"
-                                required
-                        />
-                        <br/>
-
-                        <input type="submit" id = "submit" name = "submit" />
-
-                </form>
+                <GroupCreation />
         </>
         );
 
