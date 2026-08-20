@@ -47,9 +47,9 @@ public class LoginExceptionHandler {
         }
         
         @ExceptionHandler(AuthenticationException.class)
-        public ResponseEntity<ResponseLoginDto> handleBadLogin(AuthenticationException e){
+        public ResponseEntity<GlobalResponseDto> handleBadLogin(AuthenticationException e){
                 return ResponseEntity
                         .status(HttpStatus.UNAUTHORIZED)
-                        .body(new ResponseLoginDto("", List.of("Bad Credential")));
+                        .body(new GlobalResponseDto(List.of("Bad Credential")));
         }
 }

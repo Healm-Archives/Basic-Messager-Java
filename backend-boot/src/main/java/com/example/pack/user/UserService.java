@@ -21,14 +21,14 @@ public class UserService {
 
         public UserDto getUserNameById(UUID userId){
                 UserJpaEntity user = userRepository.getReferenceById(userId);
-                return userMapping.userToDto(user);
+                return userMapping.toDto(user);
         }
 
         public List<UserDto> getAllUserDto(){
                 return userRepository
                         .findAll()
                         .stream()
-                        .map(userMapping::userToDto)
+                        .map(userMapping::toDto)
                         .toList();
         }
 
@@ -36,7 +36,7 @@ public class UserService {
                 return userRepository
                         .findByNameStartsWith(name)
                         .stream()
-                        .map(userMapping::userToDto)
+                        .map(userMapping::toDto)
                         .toList();
         }
 

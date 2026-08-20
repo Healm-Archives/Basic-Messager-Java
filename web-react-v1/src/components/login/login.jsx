@@ -18,7 +18,7 @@ const Login = () => {
 
         const navigate = useNavigate();
 
-        const { setToken, setUsername } = useAuth();
+        const { setToken, setUsername, setUserUuid } = useAuth();
 
         const [ errorLogin, setErrorLogin ] = useState();
         
@@ -42,12 +42,13 @@ const Login = () => {
 
                 await api.post("/login", 
                         payload,
-                ).then(res => {                        
-
+                ).then(res => {
+                        
                         setErrorLogin(res.data.message);
-;
+                        
                         setToken(res.data.token);
                         setUsername(loginUsername);
+                        setUserUuid(res.data.userUuid);
 
                         navigate("/home");
                 })
@@ -75,7 +76,6 @@ const Login = () => {
                                 type="text" 
                                 id = "username" 
                                 name = "name" 
-                                value = {loginUsername} 
                                 onChange = {handleUsername}
                                 required />
                         <br/>
@@ -85,7 +85,6 @@ const Login = () => {
                                 type="password" 
                                 id = "password" 
                                 name = "password" 
-                                value = {loginPassword} 
                                 onChange = {handlePassword}
                                 required />
                         <br/>
