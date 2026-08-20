@@ -36,8 +36,7 @@ public class GroupController {
         
         @PostMapping("/group/create")
         public ResponseEntity<GlobalResponseDto> createGroup(@Valid @RequestBody GroupCreateDto dto) {
-                groupService.createGroup(dto);
-                return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Created Successfully")));
+                return groupService.createGroup(dto);
         }
         
         @PostMapping("/group/join/{groupUuid}")
@@ -45,9 +44,21 @@ public class GroupController {
                 @RequestBody UserInfoDto userDto,
                 @PathVariable("groupUuid") UUID groupUuid
         ) {
-                System.out.println("Group UUID: " + groupUuid);
+                // System.out.println("Group UUID: " + groupUuid);
                 // return ResponseEntity.ok().build();
                 return groupService.joinGroup(groupUuid, userDto);
+                // return ResponseEntity.badRequest().body(new GlobalResponseDto(List.of("Group Joined Successfully")));
+                // return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Joined Successfully")));
+        }
+
+        @PostMapping("/group/leave/{groupUuid}")
+        public ResponseEntity<GlobalResponseDto> leaveGroup(
+                @RequestBody UserInfoDto userDto,
+                @PathVariable("groupUuid") UUID groupUuid
+        ) {
+                // System.out.println("Group UUID: " + groupUuid);
+                // return ResponseEntity.ok().build();
+                return groupService.leaveGroup(groupUuid, userDto);
                 // return ResponseEntity.badRequest().body(new GlobalResponseDto(List.of("Group Joined Successfully")));
                 // return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Joined Successfully")));
         }

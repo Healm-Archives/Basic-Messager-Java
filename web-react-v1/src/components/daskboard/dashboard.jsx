@@ -54,11 +54,29 @@ const Dashboard = () => {
                 });
         }
 
+        const leaveGroupApi = async (group) => {
+                await api.post(`/group/leave/${group.groupUuid}`,
+                {
+                        userUuid: userUuid
+                },
+                {
+                        headers: {
+                                Authorization: `Bearer ${token}`
+                        }
+                })
+                .then(res => {
+                        console.log(res);
+                })
+                .catch(error => {
+                        console.log("eRror " + error);
+                });
+        }
+
         const JoinGroup = ({group}) => {
                 return (
                         <>
-                                <br/>
                                 <button onClick={() => joinGroupApi(group)}>Join Group</button>
+                                <button onClick={() => leaveGroupApi(group)}>Leave Group</button>
                         </>
                 );
         }

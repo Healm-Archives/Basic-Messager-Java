@@ -32,9 +32,10 @@ public class GroupService {
                         .toList();
         }
 
-        public void createGroup(GroupCreateDto dto){
+        public ResponseEntity<GlobalResponseDto> createGroup(GroupCreateDto dto){
                 GroupJpaEntity entity = groupMapper.toEntity(dto);
                 groupRepository.save(entity);
+                return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Created Successfully")));
         }
 
         public ResponseEntity<GlobalResponseDto> joinGroup(UUID groupUuid, UserInfoDto userDto) {
@@ -53,7 +54,26 @@ public class GroupService {
 
                 groupRepository.save(entity);
                 
-                return ResponseEntity.badRequest().body(new GlobalResponseDto(List.of("Group Joined Successfully")));
+                return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Joined Successfully")));
+        }
+        
+        public ResponseEntity<GlobalResponseDto> leaveGroup(UUID groupUuid, UserInfoDto userDto) {
+                GroupJpaEntity entity = groupRepository.findById(groupUuid).orElseThrow();                
+                
+                List<UserJpaEntity> memberList = entity.getMemberList();
+                
+                UserJpaEntity currentUser = userRepository.findById(userDto.userUuid()).orElse(null);
+                
+                if (!memberList.contains(currentUser) || currentUser == null){
+                        return ResponseEntity.badRequest().body(new GlobalResponseDto(List.of("User already left the group")));
+                }
+                memberList.remove(currentUser);
+                
+                entity.setMemberList(memberList);
+
+                groupRepository.save(entity);
+                
+                return ResponseEntity.ok(new GlobalResponseDto(List.of("Group left Successfully")));
         }
 
 
