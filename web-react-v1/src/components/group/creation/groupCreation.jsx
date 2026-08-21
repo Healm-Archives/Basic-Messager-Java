@@ -6,8 +6,9 @@ const GroupCreation = () => {
 
         const { token } = useAuth();
 
-        // const [groupName, setGroupName] = useState();
         const [errorMessage, setErrorMessage] = useState();
+
+        const [createGroup, setCreateGroup] = useState(false);
 
 
         const OnCreateGroup = async () => {
@@ -15,14 +16,15 @@ const GroupCreation = () => {
                         name: document.getElementById("groupName").value
                 }
 
-                await api.post("/group", payload, {
+                await api.post("/group/create", payload, {
                         headers: {
                                 Authorization: `Bearer ${token}`
                         }
                 })
                 .then(res => {
                         console.log(res);
-                        setErrorMessage(res.data.message);        
+                        setErrorMessage(res.data.message);
+                        setCreateGroup(false);
                 })
                 .catch(error => {
                         console.log(error.response.data);
@@ -30,24 +32,39 @@ const GroupCreation = () => {
                 });
         }
 
+        const toggleCreateGroup = () => {
+                setCreateGroup(prev => !prev);
+        }
+
         return (
-                <form action = {OnCreateGroup}>
-                        {errorMessage}
-                        <br/>
-                        <label htmlFor="groupName">Group name : </label>
-                        <input 
-                                type = "text" 
-                                name = "groupName" 
-                                id = "groupName"
-                                // value = {groupName}
-                                // onChange = {}
-                                required
-                        />
-                        <br/>
+        <>
+                <button onClick={toggleCreateGroup}>
+                        {createGroup? "Cancel" : "Create new group"}
+                </button>
 
-                        <input type="submit" id = "submit" name = "submit" />
+                <br/>
+                
+                {
+                createGroup && (
+                        <form action = {OnCreateGroup}>
+                                {errorMessage}
+                                <br/>
+                                <label htmlFor="groupName">Group name : </label>
+                                <input 
+                                        type = "text" 
+                                        name = "groupName" 
+                                        id = "groupName"
+                                        required
+                                />
+                                <br/>
 
-                </form>
+                                <input type="submit" id = "submit" name = "submit" />
+
+                        </form>
+
+                )
+                }
+        </>
         );
 }
 

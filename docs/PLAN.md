@@ -6,6 +6,13 @@ database: postgres
 
 ---
 
+TO-DO:
+        - edit group metadata (group profile, name, desc, members)
+        - group interface frontend, db, new table
+        - we need custom page (recommended poppup) for editing group
+
+---
+
 backend:
         user:
                 - service user, 
@@ -35,21 +42,29 @@ frontend:
         for now, display all messages from the database
 
 ---
-TO-DO:
-        - group interface frontend, db, new table
-        - edit group metadata (group profile, name, desc, members)
 
----
+add :
+        validation
+        unittest
+        javafaker
+        query
+        modifying, transactional
+        specification
+        secrets for password
 
-command:
-        compose:
-                podman compose -f backend/compose.yaml up 
+cmd:
+        podman compose -f backend-boot/compose.yaml up 
+        npm run dev
         
 link:
         java-boot:
                 http://localhost:8080
         web-react:
                 http://localhost:3000
+        cloudbeaver:
+                http://localhost:8979
+
+---
 
 test:
         curl -iG http://localhost:8080/api/v1/users
@@ -83,21 +98,7 @@ test:
 
         curl -iG http://localhost:8080/api/v1/group
 
-add :
-        validation
-        unittest
-        javafaker
-        query
-        modifying, transactional
-        specification
-        secrets for password
-
-cmd:
-        podman compose -f backend-boot/compose.yaml up 
-        npm run dev
-
-
-
+---
 
 
 
@@ -105,5 +106,10 @@ cmd:
 
 (index):1 Access to XMLHttpRequest at 'http://localhost:8080/messages' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 
+curl -i -X POST http://localhost:8080/api/v1/register \
+                -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZWFsbTEiLCJpYXQiOjE3ODY1MzgxMzYsImV4cCI6MTc4NjU0MTczNn0.SjC39xwnLCxAaNULfKPejNaeI2uuQZnZ4EFb3UDktjY" \
+                -H "Content-Type: application/json" \
+                -d '{"name": "healm1", "password": "12"}'
+
 curl -iG http://localhost:8080/api/v1/users \
-        -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZWFsbSIsImlhdCI6MTc4NTQxODQ3NSwiZXhwIjoxNzg1NDIyMDc1fQ.eo_xu3LVK834CHD-Os3gxVPCt_IpAIqnhMfp4LXoT54"
+        -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJoZWFsbTEiLCJpYXQiOjE3ODY1MzgxMzYsImV4cCI6MTc4NjU0MTczNn0.SjC39xwnLCxAaNULfKPejNaeI2uuQZnZ4EFb3UDktjY"

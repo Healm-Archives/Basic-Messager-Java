@@ -1,6 +1,7 @@
 package com.example.pack.login;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -32,7 +33,7 @@ public class LoginService {
 
         public ResponseEntity<GlobalResponseDto> authenticateRegister(LoginUserDto userDto){
                 
-                UserJpaEntity user = userMapper.privateDtoToUser(userDto);
+                UserJpaEntity user = userMapper.toUser(userDto);
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
 
                 userRepository.save(user);
@@ -53,8 +54,11 @@ public class LoginService {
                 UserDetails user = (UserDetails) authentication.getPrincipal();
                 String token = jwtService.generateToken(user);
                 
+                UserJpaEntity userEntity = userRepository.findByName(dto.name()).orElseThrow();
+                UUID userUuid = userEntity.getUuid();
+                
                 // System.out.println("Bearer " + token);
-                return ResponseEntity.ok(new ResponseLoginDto(token, List.of("Successful login")));
+                return ResponseEntity.ok(new ResponseLoginDto(token, userUuid, List.of("Successful login")));
                 
         }
 }

@@ -6,29 +6,12 @@ import GroupCreation from "../group/creation/groupCreation";
 
 const Dashboard = () => {
 
-        const { token, username } = useAuth();
+        const { token, username, userUuid } = useAuth();
         const navigate = useNavigate();
+
         const [groups, setGroups] = useState([]);
 
         const getGroups = async () => {
-        
-                // try {
-                //         const response = await api.get("/groups", {
-                //                 headers: {
-                //                         Authorization: `Bearer ${token}`
-                //                 }
-                //         });
-                        
-                //         setGroups(response.data);
-                //         console.log(response.data);
-                        
-                // } 
-                
-                // catch (error) 
-                // {
-                //         console.log("eRror" + error);
-                // }
-
                 await api.get("/groups", {
                         headers: {
                                 Authorization: `Bearer ${token}`
@@ -36,7 +19,7 @@ const Dashboard = () => {
                 })
                 .then(res => {
                         setGroups(res.data);
-                        console.log(res.data);
+                        // console.log(res.data);
                 })
                 .catch(error => {
                         console.log("eRror" + error);
@@ -52,10 +35,56 @@ const Dashboard = () => {
                 getGroups();
         }, []);
 
+
+        const joinGroupApi = async (group) => {
+                await api.post(`/group/join/${group.groupUuid}`, 
+                {
+                        userUuid: userUuid
+                }, 
+                {
+                        headers: {
+                                Authorization: `Bearer ${token}`
+                        }
+                })
+                .then(res => {
+                        // console.log(res);
+                })
+                .catch(error => {
+                        console.log("eRror " + error);
+                });
+        }
+
+        const leaveGroupApi = async (group) => {
+                await api.post(`/group/leave/${group.groupUuid}`,
+                {
+                        userUuid: userUuid
+                },
+                {
+                        headers: {
+                                Authorization: `Bearer ${token}`
+                        }
+                })
+                .then(res => {
+                        // console.log(res);
+                })
+                .catch(error => {
+                        console.log("eRror " + error);
+                });
+        }
+
+        const JoinGroup = ({group}) => {
+                return (
+                        <>
+                                <button onClick={() => joinGroupApi(group)}>Join Group</button>
+                                <button onClick={() => leaveGroupApi(group)}>Leave Group</button>
+                        </>
+                );
+        }
+
         const groupListSection = groups.map(group => {
                 return (
                         <>
-                                GroupName : {group.name}
+                                GroupName : {group.name} <JoinGroup group = {group}/>
                                 <br/>
                         </>
                 )
@@ -67,9 +96,6 @@ const Dashboard = () => {
                 <br/>
                 My Group Name: <br/>
                 {groupListSection}
-                <br/>
-                create new group
-                <br/>
                 <br/>
                 <GroupCreation />
         </>
