@@ -9,6 +9,7 @@ database: postgres
 TO-DO:
         - edit group metadata (group profile, name, desc, members)
         - group interface frontend, db, new table
+        - we need custom page (recommended poppup) for editing group
 
 ---
 
@@ -60,6 +61,8 @@ link:
                 http://localhost:8080
         web-react:
                 http://localhost:3000
+        cloudbeaver:
+                http://localhost:8979
 
 ---
 

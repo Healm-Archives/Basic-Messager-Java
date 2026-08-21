@@ -47,7 +47,7 @@ const Dashboard = () => {
                         }
                 })
                 .then(res => {
-                        console.log(res);
+                        // console.log(res);
                 })
                 .catch(error => {
                         console.log("eRror " + error);
@@ -65,7 +65,7 @@ const Dashboard = () => {
                         }
                 })
                 .then(res => {
-                        console.log(res);
+                        // console.log(res);
                 })
                 .catch(error => {
                         console.log("eRror " + error);
