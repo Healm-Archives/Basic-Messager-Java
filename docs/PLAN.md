@@ -11,6 +11,9 @@ TO-DO:
         - group interface frontend, db, new table
         - we need custom page (recommended poppup) for editing group
 
+        - create a floating form for group creation form
+        - make it cover full screen and darken background
+
 ---
 
 backend:

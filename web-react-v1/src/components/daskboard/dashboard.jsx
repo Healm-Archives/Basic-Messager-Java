@@ -94,7 +94,7 @@ const Dashboard = () => {
         <>
                 Welcome, {username}
                 <br/>
-                My Group Name: <br/>
+                {/* My Group Name: <br/> */}
                 {groupListSection}
                 <br/>
                 <GroupCreation />
