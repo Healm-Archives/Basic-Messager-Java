@@ -7,12 +7,20 @@ database: postgres
 ---
 
 TO-DO:
-        - edit group metadata (group profile, name, desc, members)
-        - group interface frontend, db, new table
-        - we need custom page (recommended poppup) for editing group
+        - fetch all groups the current users already joined
+                - api:
+                        - get all groupa by current user uuid
 
-        - create a floating form for group creation form
-        - make it cover full screen and darken background
+        - a section to search for available group
+                - api:
+                        - return groups that starts with name, return group name and uuid
+
+        - add edit panel for interactions with group 
+                - view all members
+                - change
+                        - description
+                        - group name
+                        - descriptions
 
 ---
 
