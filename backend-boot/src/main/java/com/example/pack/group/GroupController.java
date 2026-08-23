@@ -17,6 +17,8 @@ import com.example.pack.user.UserInfoDto;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -26,13 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class GroupController {
 
         private final GroupService groupService;
-        
-        @GetMapping("/groups")
-        public List<GroupInfoDto> getGroupList(
-                
-        ) {
-                return groupService.getGroupList();
-        }
         
         @PostMapping("/group/create")
         public ResponseEntity<GlobalResponseDto> createGroup(@Valid @RequestBody GroupCreateDto dto) {
@@ -61,6 +56,21 @@ public class GroupController {
                 return groupService.leaveGroup(groupUuid, userDto);
                 // return ResponseEntity.badRequest().body(new GlobalResponseDto(List.of("Group Joined Successfully")));
                 // return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Joined Successfully")));
+        }
+        
+
+        // @GetMapping("/groups")
+        // public List<GroupInfoDto> getGroupList(
+                
+        // ) {
+        //         return groupService.getGroupList();
+        // }
+
+        @GetMapping("/groups/{userUuid}")
+        public ResponseEntity<GroupListDto> getUserGroups(
+                @PathVariable("userUuid") UUID userUuid
+        ) {
+                return groupService.getGroupListByUser(userUuid);
         }
         
 

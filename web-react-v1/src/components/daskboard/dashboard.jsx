@@ -12,13 +12,14 @@ const Dashboard = () => {
         const [groups, setGroups] = useState([]);
 
         const getGroups = async () => {
-                await api.get("/groups", {
+                await api.get(`/groups/${userUuid}`, 
+                {
                         headers: {
                                 Authorization: `Bearer ${token}`
                         }
                 })
                 .then(res => {
-                        setGroups(res.data);
+                        setGroups(res.data.groupList);
                         // console.log(res.data);
                 })
                 .catch(error => {
@@ -84,7 +85,7 @@ const Dashboard = () => {
         const groupListSection = groups.map(group => {
                 return (
                         <>
-                                GroupName : {group.name} <JoinGroup group = {group}/>
+                                {group.name} <JoinGroup group = {group}/>
                                 <br/>
                         </>
                 )
@@ -92,9 +93,9 @@ const Dashboard = () => {
 
         return (
         <>
-                Welcome, {username}
-                <br/>
+                Welcome, {username} <br/>
                 {/* My Group Name: <br/> */}
+                Join Group <br/>
                 {groupListSection}
                 <br/>
                 <GroupCreation />

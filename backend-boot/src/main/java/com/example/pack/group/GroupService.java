@@ -1,5 +1,6 @@
 package com.example.pack.group;
 
+import com.example.pack.login.LoginController;
 import java.util.List;
 import java.util.UUID;
 
@@ -74,6 +75,18 @@ public class GroupService {
                 groupRepository.save(entity);
                 
                 return ResponseEntity.ok(new GlobalResponseDto(List.of("Group left Successfully")));
+        }
+
+        public ResponseEntity<GroupListDto> getGroupListByUser(UUID userUuid) {
+                List<GroupInfoDto> dto = groupRepository.findAllByMemberListUuid(userUuid)
+                                                .stream()
+                                                .map(groupMapper::toInfoDto)
+                                                .toList();
+
+                
+
+                return ResponseEntity.ok(new GroupListDto(dto));
+
         }
 
 
