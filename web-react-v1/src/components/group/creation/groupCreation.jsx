@@ -1,13 +1,12 @@
 import { useState } from "react";
 import api from "../../../api/axiosConfig";
 import { useAuth } from "../../auth/authConfig";
+import "./groupCreation.css";
 
 const GroupCreation = () => {
 
         const { token } = useAuth();
-
         const [errorMessage, setErrorMessage] = useState();
-
         const [createGroup, setCreateGroup] = useState(false);
 
 
@@ -38,29 +37,32 @@ const GroupCreation = () => {
 
         return (
         <>
-                <button onClick={toggleCreateGroup}>
-                        {createGroup? "Cancel" : "Create new group"}
-                </button>
+                <button onClick={toggleCreateGroup}>Create new group</button>
 
                 <br/>
                 
                 {
                 createGroup && (
-                        <form action = {OnCreateGroup}>
-                                {errorMessage}
-                                <br/>
-                                <label htmlFor="groupName">Group name : </label>
-                                <input 
-                                        type = "text" 
-                                        name = "groupName" 
-                                        id = "groupName"
-                                        required
-                                />
-                                <br/>
+                        <div className="floating-panel">
 
-                                <input type="submit" id = "submit" name = "submit" />
+                                <form action = {OnCreateGroup}>
+                                        <button onClick={toggleCreateGroup}>Cancel</button>
+                                        <br/>
+                                        <label htmlFor="groupName">Group name : </label>
+                                        <input 
+                                                type = "text" 
+                                                name = "groupName" 
+                                                id = "groupName"
+                                                required
+                                        />
+                                        <br/>
+                                        {errorMessage}
+                                        <br/>
 
-                        </form>
+                                        <input type="submit" id = "submit" name = "submit" />
+
+                                </form>
+                        </div>
 
                 )
                 }
