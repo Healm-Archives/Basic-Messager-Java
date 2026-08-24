@@ -57,20 +57,19 @@ public class GroupController {
                 // return ResponseEntity.badRequest().body(new GlobalResponseDto(List.of("Group Joined Successfully")));
                 // return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Joined Successfully")));
         }
-        
-
-        // @GetMapping("/groups")
-        // public List<GroupInfoDto> getGroupList(
-                
-        // ) {
-        //         return groupService.getGroupList();
-        // }
 
         @GetMapping("/groups/{userUuid}")
         public ResponseEntity<GroupListDto> getUserGroups(
                 @PathVariable("userUuid") UUID userUuid
         ) {
                 return groupService.getGroupListByUser(userUuid);
+        }
+
+        @GetMapping("/groups/search")
+        public ResponseEntity<GroupListDto> getUserGroups(
+                @RequestParam("groupName") String groupName
+        ) {
+                return groupService.getGroupListByName(groupName);
         }
         
 

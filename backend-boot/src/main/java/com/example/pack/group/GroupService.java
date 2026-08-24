@@ -83,7 +83,16 @@ public class GroupService {
                                                 .map(groupMapper::toInfoDto)
                                                 .toList();
 
-                
+
+                return ResponseEntity.ok(new GroupListDto(dto));
+
+        }
+
+        public ResponseEntity<GroupListDto> getGroupListByName(String groupName) {
+                List<GroupInfoDto> dto = groupRepository.findAllByNameStartsWith(groupName)
+                                                .stream()
+                                                .map(groupMapper::toInfoDto)
+                                                .toList();
 
                 return ResponseEntity.ok(new GroupListDto(dto));
 

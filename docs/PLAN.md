@@ -7,11 +7,11 @@ database: postgres
 ---
 
 TO-DO:
-        - fetch all groups the current users already joined
+        ^ fetch all groups the current users already joined
                 - api:
                         - get all groupa by current user uuid
 
-        - a section to search for available group
+        ^ a section to search for available group
                 - api:
                         - return groups that starts with name, return group name and uuid
 
