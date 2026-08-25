@@ -98,6 +98,16 @@ public class GroupService {
 
         }
 
+        public ResponseEntity<GlobalResponseDto> editGroup(GroupEditDto groupEditDto) {
+                GroupJpaEntity entity = groupRepository.findById(groupEditDto.groupUuid()).orElseThrow();
+                entity.setName(groupEditDto.groupName());
+                entity.setDescription(groupEditDto.description());
+
+                groupRepository.save(entity);
+
+                return ResponseEntity.ok(new GlobalResponseDto(List.of("Successfully applied changes")));
+        }
+
 
 
 }

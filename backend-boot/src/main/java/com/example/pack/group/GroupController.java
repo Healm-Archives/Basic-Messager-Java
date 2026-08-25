@@ -58,6 +58,14 @@ public class GroupController {
                 // return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Joined Successfully")));
         }
 
+        @PostMapping("/group/edit")
+        public ResponseEntity<GlobalResponseDto> editGroup(
+                @RequestBody GroupEditDto groupEditDto
+        ) {
+                return groupService.editGroup(groupEditDto);
+        }
+        
+
         @GetMapping("/groups/{userUuid}")
         public ResponseEntity<GroupListDto> getUserGroups(
                 @PathVariable("userUuid") UUID userUuid

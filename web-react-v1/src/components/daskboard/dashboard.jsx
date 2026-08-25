@@ -103,8 +103,8 @@ const Dashboard = () => {
                 return (
                         <>
                                 {join && <button onClick={() => joinGroupApi(group)}>Join Group</button>}
-                                {edit && <button onClick={() => leaveGroupApi(group)}>Leave Group</button>}
-                                {leave && <GroupEditForm />}
+                                {leave && <button onClick={() => leaveGroupApi(group)}>Leave Group</button>}
+                                {edit && <GroupEditForm group={group} />}
                         </>
                 );
         }
@@ -112,7 +112,7 @@ const Dashboard = () => {
         const groupListSection = groups.map(group => {
                 return (
                         <>
-                                {group.name} <GroupList group = {group} join edit leave/>
+                                {group.groupName} <GroupList group = {group} join edit leave/>
                                 <br/>
                         </>
                 )
@@ -121,7 +121,6 @@ const Dashboard = () => {
         const groupSearchToggle = () => {
                 setSearchGroups(state => !state);
         }
-
         const GroupSearchBar = () => {
                 return (<>
                         <button onClick={groupSearchToggle}>Search</button>
@@ -153,12 +152,10 @@ const Dashboard = () => {
         }
 
         const GroupSearchResult = () => {
-                console.log(searchGroupResult);
-                
                 const searchResult = searchGroupResult.map(group => {
                         return (
                                 <>
-                                        {group.name} <GroupList group = {group} join/>
+                                        {group.groupName} <GroupList group = {group} join/>
                                         <br/>
                                 </>
                         )});
@@ -177,7 +174,28 @@ const Dashboard = () => {
                 setToggleGroupEdit(value => !value);
         }
 
-        const GroupEditForm = () => {
+
+        const editGroupApi = async (groupUuid) => {
+                await api.post("/group/edit", {
+                        groupUuid: groupUuid,
+                        groupName: document.getElementById("groupEditGroupName").value,
+                        description: document.getElementById("groupEditDescription").value
+                }, {
+                        headers: {
+                                Authorization: `Bearer ${token}`
+                        }
+                })
+                .then(res => {
+
+                        console.log(res.data);
+                })
+                .catch(error => {
+                        console.log("eRRor ", error.response.data);
+                        
+                });
+        }
+
+        const GroupEditForm = ({group}) => {
                 return (<>
                         <button onClick={OnGroupEdit}>Edit Group</button>
 
@@ -185,18 +203,19 @@ const Dashboard = () => {
                                 <div className="floating-panel">
                                         <h1>Edit Group</h1>
                                         <button onClick={OnGroupEdit}>Cancel</button> <br />
-                                        <form action={() => {}}>
-                                                <label htmlFor="groupEditDescription">Description: </label>
-                                                <input 
-                                                        type="text"
-                                                        name="groupEditDescription"
-                                                        id="groupEditDescription"
-                                                /> <br/>
+                                        <form action={() => editGroupApi(group.groupUuid)}>
                                                 <label htmlFor="groupEditGroupName">Group Name: </label>
                                                 <input 
                                                         type="text"
                                                         name= "groupEditGroupName"
                                                         id= "groupEditGroupName"
+                                                        defaultValue={group.groupName}
+                                                /> <br/>
+                                                <label htmlFor="groupEditDescription">Description: </label>
+                                                <input 
+                                                        type="text"
+                                                        name="groupEditDescription"
+                                                        id="groupEditDescription"
                                                 /> <br/>
 
                                                 <button type="submit">Apply Change</button>
