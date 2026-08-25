@@ -7,6 +7,7 @@ const GroupSeach = () => {
 
         const { token } = useAuth();
         const [searchGroups, setSearchGroups] = useState(false);
+        const [searchGroupResult, setSearchGroupResult] = useState([]);
 
         const groupSearchToggle = () => {
                 setSearchGroups(state => !state);
@@ -25,9 +26,7 @@ const GroupSeach = () => {
                         }
                 })
                 .then(res => {
-                        // setGroups(res.data.groupList);
                         setSearchGroupResult(res.data.groupList);
-                        // console.log(res.data);
                 })
                 .catch(error => {
                         console.log("eRror" + error);
@@ -35,13 +34,11 @@ const GroupSeach = () => {
 
         };
 
-        const [searchGroupResult, setSearchGroupResult] = useState([]);
 
         const GroupSearchResult = () => {
                 const searchResult = searchGroupResult.map(group => {
                         return (
                                 <>
-                                        {/* {group.groupName} <GroupList group = {group} join/> */}
                                         {group.groupName} <GroupJoin group = {group} />
                                         <br/>
                                 </>

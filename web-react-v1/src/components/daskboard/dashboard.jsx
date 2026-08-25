@@ -5,18 +5,18 @@ import { useNavigate } from "react-router-dom";
 import GroupCreation from "../group/creation/groupCreation";
 import "./dashboard.css";
 import GroupJoin from "../group/join/groupJoin";
-import GroupLeave from "../group/join/groupLeave";
+import GroupLeave from "../group/leave/groupLeave";
 import GroupSeach from "../group/search/groupSearch";
-import GroupEdit from "../group/join/groupEdit";
+import GroupEdit from "../group/edit/groupEdit";
 
 const Dashboard = () => {
 
         const { token, username, userUuid } = useAuth();
         const navigate = useNavigate();
 
-        const [groups, setGroups] = useState([]);
+        const [joinedGroups, setJoinedGroups] = useState([]);
 
-        const getGroups = async () => {
+        const getJoinedGroupsApi = async () => {
                 await api.get(`/groups/${userUuid}`, 
                 {
                         headers: {
@@ -24,7 +24,7 @@ const Dashboard = () => {
                         }
                 })
                 .then(res => {
-                        setGroups(res.data.groupList);
+                        setJoinedGroups(res.data.groupList);
                 })
                 .catch(error => {
                         console.log("eRror" + error);
@@ -37,18 +37,18 @@ const Dashboard = () => {
                         navigate("/login");
                         return;
                 }
-                getGroups();
+                getJoinedGroupsApi();
         }, []);
 
-        const groupListSection = groups.map(group => {
+        const groupListSection = joinedGroups.map(group => {
                 return (
-                        <>
-                                {group.groupName}
-                                        <GroupJoin group = {group} />
-                                        <GroupLeave group = {group} />
-                                        <GroupEdit group={group} />
-                                <br/>
-                        </>
+                <>
+                        {group.groupName}
+                        <GroupJoin group = {group} />
+                        <GroupLeave group = {group} />
+                        <GroupEdit group={group} />
+                        <br/>
+                </>
                 )
         });
 

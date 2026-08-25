@@ -3,7 +3,7 @@ import { useAuth } from "../../auth/authConfig";
 
 const GroupJoin = ({group}) => {
 
-        const { token, username, userUuid } = useAuth();
+        const { token, userUuid } = useAuth();
 
         const joinGroupApi = async (group) => {
                 await api.post(`/group/join/${group.groupUuid}`, 

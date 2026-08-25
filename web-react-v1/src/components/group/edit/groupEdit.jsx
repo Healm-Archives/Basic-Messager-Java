@@ -12,7 +12,6 @@ const GroupEdit = ({group}) => {
                 setToggleGroupEdit(value => !value);
         }
 
-
         const editGroupApi = async (groupUuid) => {
                 await api.post("/group/edit", {
                         groupUuid: groupUuid,
@@ -24,8 +23,7 @@ const GroupEdit = ({group}) => {
                         }
                 })
                 .then(res => {
-
-                        console.log(res.data);
+                        // console.log(res.data);
                 })
                 .catch(error => {
                         console.log("eRRor ", error.response.data);
@@ -33,7 +31,6 @@ const GroupEdit = ({group}) => {
                 });
         }
 
-        // const GroupEditForm = ({group}) => {
         return (<>
                 <button onClick={OnGroupEdit}>Edit Group</button>
 
@@ -63,7 +60,7 @@ const GroupEdit = ({group}) => {
                 }
 
         </>);
-        // }
+        
 }
 
 export default GroupEdit

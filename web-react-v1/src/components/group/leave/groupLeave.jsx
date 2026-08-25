@@ -3,7 +3,7 @@ import { useAuth } from "../../auth/authConfig";
 
 const GroupLeave = ({group}) => {
 
-        const { token, username, userUuid } = useAuth();
+        const { token, userUuid } = useAuth();
         
         const leaveGroupApi = async (group) => {
                 await api.post(`/group/leave/${group.groupUuid}`,
