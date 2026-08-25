@@ -9,11 +9,15 @@
         justify-items: center;
         font-size: 16px;
         
-        button {
+        * {
                 font-size: 24px;
 
         }
-        /* form {
+        * + * {
+                margin-top: 25px;
+        }
+
+        form {
                 * {
                         font-size: 24px;
 
@@ -24,6 +28,12 @@
                 * + * {
                         margin-top: 25px;
                 }
-        } */
+        }
+
+}
+
+.search-result {
+        width: 80%;
+        background-color: #343434;
 
 }
