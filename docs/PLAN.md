@@ -15,7 +15,7 @@ TO-DO:
                 - api:
                         - return groups that starts with name, return group name and uuid
 
-        - add edit panel for interactions with group 
+        ^ add edit panel for interactions with group 
                 - view all members
                 ^ change
                         - description

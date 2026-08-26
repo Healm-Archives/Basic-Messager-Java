@@ -71,7 +71,7 @@ public class GroupController {
         }
         
         @GetMapping("/group/{groupUuid}/members")
-        public ResponseEntity<GlobalResponseDto> getMethodName(
+        public ResponseEntity<GroupMemberDto> getMethodName(
                 @PathVariable("groupUuid") UUID groupUuid
         ) {
             return groupService.getGroupMembers(groupUuid);

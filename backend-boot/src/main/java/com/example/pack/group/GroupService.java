@@ -110,7 +110,7 @@ public class GroupService {
                 return ResponseEntity.ok(new GlobalResponseDto(List.of("Successfully applied changes")));
         }
 
-        public ResponseEntity<GlobalResponseDto> getGroupMembers(UUID groupUuid) {
+        public ResponseEntity<GroupMemberDto> getGroupMembers(UUID groupUuid) {
                 GroupJpaEntity entity = groupRepository.findById(groupUuid).orElseThrow();
 
                 List<UserMemberDto> memberList = entity.getMemberList()
@@ -118,7 +118,7 @@ public class GroupService {
                         .map(userMapper::toMemberDto)
                         .toList();
 
-                return ResponseEntity.ok(new GlobalResponseDto(List.of(memberList.toString())));
+                return ResponseEntity.ok(new GroupMemberDto(memberList));
         }
 
 

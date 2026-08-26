@@ -38,12 +38,29 @@ const GroupEdit = ({group}) => {
                         }
                 })
                 .then(res => {
-                        console.log(res.data)
+                        // console.log(res.data.memberList)
+                        setGroupMembers(res.data.memberList)
                 })
                 .catch(error => {
                         console.log("eRRor ", error.response.data);
                         
                 });
+        }
+
+        const [ groupMembers, setGroupMembers ] = useState([]);
+
+        const GroupMemberSection = () => {
+                
+                const groupMemberLayout = groupMembers.map(member => {
+                        return (<>
+                                - {member.name}: {member.userUuid} <br />
+                        </>);
+                });
+
+                return (<>
+                     Group Members: <br/>
+                     {groupMemberLayout}   
+                </>);
         }
 
         return (<>
@@ -69,7 +86,7 @@ const GroupEdit = ({group}) => {
                                         /> <br/>
 
                                         <button onClick={() => getGroupMembers(group.groupUuid)}>Get Members</button> <br />
-
+                                        <GroupMemberSection />
                                         <button type="submit">Apply Change</button>
                                 </form>
 
