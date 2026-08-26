@@ -31,6 +31,21 @@ const GroupEdit = ({group}) => {
                 });
         }
 
+        const getGroupMembers = async (groupUuid) => {
+                await api.get(`/group/${groupUuid}/members`, {
+                        headers: {
+                                Authorization: `Bearer ${token}`
+                        }
+                })
+                .then(res => {
+                        console.log(res.data)
+                })
+                .catch(error => {
+                        console.log("eRRor ", error.response.data);
+                        
+                });
+        }
+
         return (<>
                 <button onClick={OnGroupEdit}>Edit Group</button>
 
@@ -52,6 +67,8 @@ const GroupEdit = ({group}) => {
                                                 name="groupEditDescription"
                                                 id="groupEditDescription"
                                         /> <br/>
+
+                                        <button onClick={() => getGroupMembers(group.groupUuid)}>Get Members</button> <br />
 
                                         <button type="submit">Apply Change</button>
                                 </form>

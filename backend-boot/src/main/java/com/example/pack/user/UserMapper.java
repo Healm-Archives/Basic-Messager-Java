@@ -32,4 +32,11 @@ public class UserMapper {
                 );
         }
 
+        public UserMemberDto toMemberDto(UserJpaEntity entity){
+                return new UserMemberDto(
+                        entity.getUuid(),
+                        entity.getName()
+                );
+        }
+
 }

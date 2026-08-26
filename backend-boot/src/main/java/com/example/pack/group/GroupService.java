@@ -12,6 +12,7 @@ import com.example.pack.global.GlobalResponseDto;
 import com.example.pack.user.UserInfoDto;
 import com.example.pack.user.UserJpaEntity;
 import com.example.pack.user.UserMapper;
+import com.example.pack.user.UserMemberDto;
 import com.example.pack.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ public class GroupService {
 
         
         private final UserRepository userRepository;
+        private final UserMapper userMapper;
 
         public List<GroupInfoDto> getGroupList(){
                 return groupRepository.findAll()
@@ -106,6 +108,17 @@ public class GroupService {
                 groupRepository.save(entity);
 
                 return ResponseEntity.ok(new GlobalResponseDto(List.of("Successfully applied changes")));
+        }
+
+        public ResponseEntity<GlobalResponseDto> getGroupMembers(UUID groupUuid) {
+                GroupJpaEntity entity = groupRepository.findById(groupUuid).orElseThrow();
+
+                List<UserMemberDto> memberList = entity.getMemberList()
+                        .stream()
+                        .map(userMapper::toMemberDto)
+                        .toList();
+
+                return ResponseEntity.ok(new GlobalResponseDto(List.of(memberList.toString())));
         }
 
 

@@ -17,7 +17,7 @@ TO-DO:
 
         - add edit panel for interactions with group 
                 - view all members
-                - change
+                ^ change
                         - description
                         - group name
 
