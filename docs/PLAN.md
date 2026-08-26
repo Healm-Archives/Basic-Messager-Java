@@ -21,6 +21,9 @@ TO-DO:
                         - description
                         - group name
 
+        - create a floating form for group creation form
+        - make it cover full screen and darken background
+
 ---
 
 backend:

@@ -54,9 +54,10 @@ const Dashboard = () => {
 
         return (
         <>
-                Welcome, {username} <br/>
-                Joined Group: <br/>
-                {groupListSection} <br/>
+                Welcome, {username}
+                <br/>
+                {/* My Group Name: <br/> */}
+                {groupListSection}
                 <br/>
                 <GroupSeach /> <br/>
                 <GroupCreation />
