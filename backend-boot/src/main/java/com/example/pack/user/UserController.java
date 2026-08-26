@@ -37,10 +37,10 @@ public class UserController {
         //         return userService.getUserNameById(userUuid);
         // }
         
-        @GetMapping("/users")
-        public List<UserDto> getUsers() {
-                return userService.getAllUserDto();
-        }
+        // @GetMapping("/users")
+        // public List<UserDto> getUsers() {
+        //         return userService.getAllUserDto();
+        // }
         
         // @GetMapping("/users/{name}")
         // public List<UserDto> getUsersContaining(

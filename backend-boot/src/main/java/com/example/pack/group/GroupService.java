@@ -1,5 +1,6 @@
 package com.example.pack.group;
 
+import com.example.pack.login.LoginController;
 import java.util.List;
 import java.util.UUID;
 
@@ -11,6 +12,7 @@ import com.example.pack.global.GlobalResponseDto;
 import com.example.pack.user.UserInfoDto;
 import com.example.pack.user.UserJpaEntity;
 import com.example.pack.user.UserMapper;
+import com.example.pack.user.UserMemberDto;
 import com.example.pack.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class GroupService {
 
         
         private final UserRepository userRepository;
+        private final UserMapper userMapper;
 
         public List<GroupInfoDto> getGroupList(){
                 return groupRepository.findAll()
@@ -74,6 +77,48 @@ public class GroupService {
                 groupRepository.save(entity);
                 
                 return ResponseEntity.ok(new GlobalResponseDto(List.of("Group left Successfully")));
+        }
+
+        public ResponseEntity<GroupListDto> getGroupListByUser(UUID userUuid) {
+                List<GroupInfoDto> dto = groupRepository.findAllByMemberListUuid(userUuid)
+                                                .stream()
+                                                .map(groupMapper::toInfoDto)
+                                                .toList();
+
+
+                return ResponseEntity.ok(new GroupListDto(dto));
+
+        }
+
+        public ResponseEntity<GroupListDto> getGroupListByName(String groupName) {
+                List<GroupInfoDto> dto = groupRepository.findAllByNameStartsWith(groupName)
+                                                .stream()
+                                                .map(groupMapper::toInfoDto)
+                                                .toList();
+
+                return ResponseEntity.ok(new GroupListDto(dto));
+
+        }
+
+        public ResponseEntity<GlobalResponseDto> editGroup(GroupEditDto groupEditDto) {
+                GroupJpaEntity entity = groupRepository.findById(groupEditDto.groupUuid()).orElseThrow();
+                entity.setName(groupEditDto.groupName());
+                entity.setDescription(groupEditDto.description());
+
+                groupRepository.save(entity);
+
+                return ResponseEntity.ok(new GlobalResponseDto(List.of("Successfully applied changes")));
+        }
+
+        public ResponseEntity<GroupMemberDto> getGroupMembers(UUID groupUuid) {
+                GroupJpaEntity entity = groupRepository.findById(groupUuid).orElseThrow();
+
+                List<UserMemberDto> memberList = entity.getMemberList()
+                        .stream()
+                        .map(userMapper::toMemberDto)
+                        .toList();
+
+                return ResponseEntity.ok(new GroupMemberDto(memberList));
         }
 
 
