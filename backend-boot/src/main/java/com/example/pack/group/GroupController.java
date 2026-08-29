@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.pack.global.GlobalResponseDto;
-import com.example.pack.user.UserInfoDto;
+import com.example.pack.group.dto.GroupCreateDto;
+import com.example.pack.group.dto.GroupEditDto;
+import com.example.pack.group.dto.GroupInfoListDto;
+import com.example.pack.group.dto.GroupMemberDto;
+import com.example.pack.user.dto.UserInfoDto;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-
-
 
 
 @RestController
@@ -28,7 +30,9 @@ public class GroupController {
         private final GroupService groupService;
         
         @PostMapping("/group/create")
-        public ResponseEntity<GlobalResponseDto> createGroup(@Valid @RequestBody GroupCreateDto dto) {
+        public ResponseEntity<GlobalResponseDto> createGroup(
+                @Valid @RequestBody GroupCreateDto dto
+        ) {
                 return groupService.createGroup(dto);
         }
         
@@ -57,21 +61,21 @@ public class GroupController {
         
 
         @GetMapping("/groups/{userUuid}")
-        public ResponseEntity<GroupListDto> getUserGroups(
+        public ResponseEntity<GroupInfoListDto> getUserGroups(
                 @PathVariable("userUuid") UUID userUuid
         ) {
                 return groupService.getGroupListByUser(userUuid);
         }
 
         @GetMapping("/groups/search")
-        public ResponseEntity<GroupListDto> getUserGroups(
+        public ResponseEntity<GroupInfoListDto> getUserSearchResultGroups(
                 @RequestParam("groupName") String groupName
         ) {
                 return groupService.getGroupListByName(groupName);
         }
         
         @GetMapping("/group/{groupUuid}/members")
-        public ResponseEntity<GroupMemberDto> getMethodName(
+        public ResponseEntity<GroupMemberDto> getGroupMembers(
                 @PathVariable("groupUuid") UUID groupUuid
         ) {
             return groupService.getGroupMembers(groupUuid);
