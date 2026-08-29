@@ -7,23 +7,7 @@ database: postgres
 ---
 
 TO-DO:
-        ^ fetch all groups the current users already joined
-                - api:
-                        - get all groupa by current user uuid
-
-        ^ a section to search for available group
-                - api:
-                        - return groups that starts with name, return group name and uuid
-
-        ^ add edit panel for interactions with group 
-                - view all members
-                ^ change
-                        - description
-                        - group name
-
-        - create a floating form for group creation form
-        - make it cover full screen and darken background
-
+        - refactor group DTOs
 ---
 
 backend:

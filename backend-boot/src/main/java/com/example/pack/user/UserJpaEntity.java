@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.example.pack.group.GroupJpaEntity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
