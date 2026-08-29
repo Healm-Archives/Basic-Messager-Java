@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class UserController {
-        private final UserService userService;
+        // private final UserService userService;
         
         // @GetMapping("/user")
         // public UserJpaEntity getUser(

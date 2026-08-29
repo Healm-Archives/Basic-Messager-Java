@@ -1,10 +1,8 @@
 package com.example.pack.group;
 
-import com.example.pack.login.LoginController;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

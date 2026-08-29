@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.UUID;
 
 import com.example.pack.user.UserJpaEntity;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
