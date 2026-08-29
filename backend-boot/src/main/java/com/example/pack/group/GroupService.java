@@ -7,11 +7,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.pack.global.GlobalResponseDto;
-import com.example.pack.user.UserInfoDto;
+import com.example.pack.group.dto.GroupCreateDto;
+import com.example.pack.group.dto.GroupEditDto;
+import com.example.pack.group.dto.GroupInfoDto;
+import com.example.pack.group.dto.GroupInfoListDto;
+import com.example.pack.group.dto.GroupMemberDto;
 import com.example.pack.user.UserJpaEntity;
 import com.example.pack.user.UserMapper;
-import com.example.pack.user.UserMemberDto;
 import com.example.pack.user.UserRepository;
+import com.example.pack.user.dto.UserInfoDto;
+import com.example.pack.user.dto.UserMemberDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,17 +31,10 @@ public class GroupService {
         private final UserRepository userRepository;
         private final UserMapper userMapper;
 
-        public List<GroupInfoDto> getGroupList(){
-                return groupRepository.findAll()
-                        .stream()
-                        .map(groupMapper::toInfoDto)
-                        .toList();
-        }
-
         public ResponseEntity<GlobalResponseDto> createGroup(GroupCreateDto dto){
                 GroupJpaEntity entity = groupMapper.toEntity(dto);
                 groupRepository.save(entity);
-                return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Created Successfully")));
+                return ResponseEntity.ok(new GlobalResponseDto("Group Created Successfully"));
         }
 
         public ResponseEntity<GlobalResponseDto> joinGroup(UUID groupUuid, UserInfoDto userDto) {
@@ -47,7 +45,7 @@ public class GroupService {
                 UserJpaEntity currentUser = userRepository.findById(userDto.userUuid()).orElse(null);
                 
                 if (memberList.contains(currentUser) || currentUser == null){
-                        return ResponseEntity.badRequest().body(new GlobalResponseDto(List.of("User already joined this group")));
+                        return ResponseEntity.badRequest().body(new GlobalResponseDto("User already joined this group"));
                 }
                 memberList.add(currentUser);
                 
@@ -55,7 +53,7 @@ public class GroupService {
 
                 groupRepository.save(entity);
                 
-                return ResponseEntity.ok(new GlobalResponseDto(List.of("Group Joined Successfully")));
+                return ResponseEntity.ok(new GlobalResponseDto("Group Joined Successfully"));
         }
         
         public ResponseEntity<GlobalResponseDto> leaveGroup(UUID groupUuid, UserInfoDto userDto) {
@@ -66,7 +64,7 @@ public class GroupService {
                 UserJpaEntity currentUser = userRepository.findById(userDto.userUuid()).orElse(null);
                 
                 if (!memberList.contains(currentUser) || currentUser == null){
-                        return ResponseEntity.badRequest().body(new GlobalResponseDto(List.of("User already left the group")));
+                        return ResponseEntity.badRequest().body(new GlobalResponseDto("User already left the group"));
                 }
                 memberList.remove(currentUser);
                 
@@ -74,27 +72,27 @@ public class GroupService {
 
                 groupRepository.save(entity);
                 
-                return ResponseEntity.ok(new GlobalResponseDto(List.of("Group left Successfully")));
+                return ResponseEntity.ok(new GlobalResponseDto("Group left Successfully"));
         }
 
-        public ResponseEntity<GroupListDto> getGroupListByUser(UUID userUuid) {
+        public ResponseEntity<GroupInfoListDto> getGroupListByUser(UUID userUuid) {
                 List<GroupInfoDto> dto = groupRepository.findAllByMemberListUuid(userUuid)
                                                 .stream()
                                                 .map(groupMapper::toInfoDto)
                                                 .toList();
 
 
-                return ResponseEntity.ok(new GroupListDto(dto));
+                return ResponseEntity.ok(new GroupInfoListDto(dto));
 
         }
 
-        public ResponseEntity<GroupListDto> getGroupListByName(String groupName) {
+        public ResponseEntity<GroupInfoListDto> getGroupListByName(String groupName) {
                 List<GroupInfoDto> dto = groupRepository.findAllByNameStartsWith(groupName)
                                                 .stream()
                                                 .map(groupMapper::toInfoDto)
                                                 .toList();
 
-                return ResponseEntity.ok(new GroupListDto(dto));
+                return ResponseEntity.ok(new GroupInfoListDto(dto));
 
         }
 
@@ -105,7 +103,7 @@ public class GroupService {
 
                 groupRepository.save(entity);
 
-                return ResponseEntity.ok(new GlobalResponseDto(List.of("Successfully applied changes")));
+                return ResponseEntity.ok(new GlobalResponseDto("Successfully applied changes"));
         }
 
         public ResponseEntity<GroupMemberDto> getGroupMembers(UUID groupUuid) {

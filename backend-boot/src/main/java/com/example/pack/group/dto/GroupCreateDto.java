@@ -1,4 +1,4 @@
-package com.example.pack.group;
+package com.example.pack.group.dto;
 
 import jakarta.validation.constraints.NotBlank;
 

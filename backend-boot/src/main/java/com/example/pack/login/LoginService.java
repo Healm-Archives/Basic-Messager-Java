@@ -37,7 +37,7 @@ public class LoginService {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
 
                 userRepository.save(user);
-                return ResponseEntity.ok(new GlobalResponseDto(List.of("Success Sign-in")));
+                return ResponseEntity.ok(new GlobalResponseDto("Success Sign-in"));
 
         }
 
