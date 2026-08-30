@@ -60,9 +60,9 @@ public class GroupController {
         }
         
 
-        @GetMapping("/groups/{userUuid}")
+        @PostMapping("/groups/joined")
         public ResponseEntity<GroupInfoListDto> getUserGroups(
-                @PathVariable("userUuid") UUID userUuid
+                @RequestBody UserInfoDto userUuid
         ) {
                 return groupService.getGroupListByUser(userUuid);
         }
