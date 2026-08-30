@@ -1,16 +1,13 @@
 package com.example.pack.message;
 
+import java.time.ZonedDateTime;
 import java.util.UUID;
-
-import com.example.pack.user.UserJpaEntity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,17 +23,30 @@ import lombok.NoArgsConstructor;
 public class MessageJpaEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)
+        @Column(
+                name = "message_uuid"
+        )
         private UUID uuid;
         
+        @Column(
+                name = "user_uuid"
+                , nullable = false
+        )
+        private UUID userUuid;
+        
+        @Column(
+                name = "group_uuid"
+                , nullable = false
+        )
+        private UUID groupUuid;
+
+        private ZonedDateTime timestamp;
+
         @Column(
                 nullable = false
         )
         private String content;
         
-        @ManyToOne
-        @JoinColumn(
-                name = "user_id"
-        )
-        private UserJpaEntity user;
+        
         
 }
