@@ -7,7 +7,10 @@ database: postgres
 ---
 
 TO-DO:
-        - refactor group DTOs
+        - add chat feature in groups
+                - every chat has a user, content, timestamp
+                - for now, fetch everything from database upon focusing on a group
+
 ---
 
 backend:
