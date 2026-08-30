@@ -8,6 +8,7 @@ import GroupJoin from "../group/join/groupJoin";
 import GroupLeave from "../group/leave/groupLeave";
 import GroupSeach from "../group/search/groupSearch";
 import GroupEdit from "../group/edit/groupEdit";
+import GroupChat from "../group/chat/groupChat";
 
 const Dashboard = () => {
 
@@ -17,7 +18,10 @@ const Dashboard = () => {
         const [joinedGroups, setJoinedGroups] = useState([]);
 
         const getJoinedGroupsApi = async () => {
-                await api.get(`/groups/${userUuid}`, 
+                await api.post(`/groups/joined`, 
+                {
+                        userUuid: `${userUuid}`
+                },
                 {
                         headers: {
                                 Authorization: `Bearer ${token}`
@@ -47,6 +51,7 @@ const Dashboard = () => {
                         <GroupJoin group = {group} />
                         <GroupLeave group = {group} />
                         <GroupEdit group={group} />
+                        <GroupChat group = {group} />
                         <br/>
                 </>
                 )

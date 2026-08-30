@@ -75,8 +75,8 @@ public class GroupService {
                 return ResponseEntity.ok(new GlobalResponseDto("Group left Successfully"));
         }
 
-        public ResponseEntity<GroupInfoListDto> getGroupListByUser(UUID userUuid) {
-                List<GroupInfoDto> dto = groupRepository.findAllByMemberListUuid(userUuid)
+        public ResponseEntity<GroupInfoListDto> getGroupListByUser(UserInfoDto userUuid) {
+                List<GroupInfoDto> dto = groupRepository.findAllByMemberListUuid(userUuid.userUuid())
                                                 .stream()
                                                 .map(groupMapper::toInfoDto)
                                                 .toList();
