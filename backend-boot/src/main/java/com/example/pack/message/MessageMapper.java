@@ -2,14 +2,9 @@ package com.example.pack.message;
 
 import org.springframework.stereotype.Service;
 
-import com.example.pack.user.UserJpaEntity;
-
 @Service
 public class MessageMapper {
         public MessageJpaEntity dtoToMessage(MessageDto msgDto){
-                // UserJpaEntity user = new UserJpaEntity();
-                // user.setUuid(msgDto.userUuid());
-                
                 return MessageJpaEntity.builder()
                         .userUuid(msgDto.userUuid())
                         .groupUuid(msgDto.groupUuid())
