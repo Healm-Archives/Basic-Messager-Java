@@ -32,7 +32,8 @@ public class GroupJpaEntity {
         private UUID uuid;
 
         @Column(
-                name = "group_name"
+                name = "group_name",
+                nullable = false
         )
         private String name;
 

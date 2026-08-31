@@ -1,4 +1,4 @@
-package com.example.pack.message;
+package com.example.pack.message.dto;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;

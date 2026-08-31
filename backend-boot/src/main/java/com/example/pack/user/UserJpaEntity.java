@@ -36,8 +36,7 @@ public class UserJpaEntity {
         private String name;
 
         private String password;
-
-        // @JsonBackReference
+        
         @ManyToMany(
                 mappedBy = "memberList"
         )

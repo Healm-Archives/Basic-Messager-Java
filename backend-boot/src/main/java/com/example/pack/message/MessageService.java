@@ -1,6 +1,12 @@
 package com.example.pack.message;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+
+import com.example.pack.message.dto.MessageChatDto;
+import com.example.pack.message.dto.MessageDto;
+import com.example.pack.message.dto.MessageGroupDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -10,25 +16,16 @@ public class MessageService {
         private final MessageRepository messageRepository;
         private final MessageMapper messageMapper;
 
-        public void addMessage(MessageDto dto){
-                MessageJpaEntity message = messageMapper.dtoToMessage(dto);                
+        public void addMessageInGroup(MessageDto dto){
+                MessageJpaEntity message = messageMapper.toEntity(dto);                
                 messageRepository.save(message);
         }
 
-        // public List<MessageDto> getAllMessages(){
-        //         return messageRepository
-        //                 .findAll()
-        //                 .stream()
-        //                 .map(messageMapper::toDto)
-        //                 .toList();
-        // }
-
-        // public List<MessageDto> getAllMessageByUserId(UUID id){
-        //         return messageRepository
-        //                 .findAllByUserUuid(id)
-        //                 .stream()
-        //                 .map(messageMapper::toDto)
-        //                 .toList();
-        // }
+        public List<MessageChatDto> getAllMessagesInGroup(MessageGroupDto groupDto) {
+                return messageRepository.findAllByGroupUuid(groupDto.groupUuid())
+                        .stream()
+                        .map(messageMapper::toChatDto)
+                        .toList();
+        }
 
 }
