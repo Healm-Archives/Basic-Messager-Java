@@ -7,12 +7,13 @@ const GroupChat = ({group}) => {
         
         const [ toggleGroupChat, setToggleGroupChat ] = useState(false);
 
-        const sendChatApi =  async () => {                
+        const sendChatApi =  async () => {
+                                 
                 await api.post("message", {
                         content: document.getElementById("chatInput").value,
                         userUuid: userUuid,
                         groupUuid: group.groupUuid,
-                        timestamp: Date.now()
+                        timestamp: new Date().toISOString()
                 },
                 {
                         headers: {
