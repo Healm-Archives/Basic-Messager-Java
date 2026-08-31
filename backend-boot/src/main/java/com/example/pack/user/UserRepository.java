@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserJpaEntity, UUID>
 {
-        public List<UserJpaEntity> findAll();
 
         public Optional<UserJpaEntity> findByName(String name);
         

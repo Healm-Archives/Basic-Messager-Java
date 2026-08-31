@@ -24,7 +24,8 @@ public class MessageJpaEntity {
         @Id
         @GeneratedValue(strategy = GenerationType.UUID)
         @Column(
-                name = "message_uuid"
+                name = "message_uuid",
+                unique = true
         )
         private UUID uuid;
         
@@ -44,7 +45,7 @@ public class MessageJpaEntity {
 
         @Column(
                 nullable = false
-        )
+        )    
         private String content;
         
         

@@ -7,8 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MessageRepository extends JpaRepository<MessageJpaEntity, UUID> 
 {
-        public List<MessageJpaEntity> findAll();
-
-        public List<MessageJpaEntity> findAllByUserUuid(UUID uuid);
+        
+        public List<MessageJpaEntity> findAllByGroupUuid(UUID groupUuid);
 
 }
