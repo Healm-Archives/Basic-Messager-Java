@@ -7,9 +7,9 @@ database: postgres
 ---
 
 TO-DO:
-        - add chat feature in groups
-                ^ every chat has a user, content, timestamp
-                - for now, fetch everything from database upon focusing on a group
+        - add ui for group chat
+                - user can be active on 1 group only
+                - render the chat dialog with id in ascending order
 
 ---
 
