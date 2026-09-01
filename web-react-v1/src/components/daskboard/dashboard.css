@@ -38,11 +38,55 @@
 
 }
 
+
 .group-list-section {
         position: fixed;
         top: 0px;
-        width: 30%;
+        width: 15%;
         height: 100%;
         background-color: #09346b;
+        display: block;
+        overflow-y: scroll;
+        /* scrollbar-width: none; */
+}
 
+.group-list-section-member{
+        /* text-align: left; */
+        width: 100%;
+        height: 70px;
+        left: 0px;
+        background-color: rgb(71, 4, 71);
+        border: 2px solid yellow;
+        box-sizing: border-box;
+}
+
+
+.group-chat-section {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        width: 85%;
+        height: calc(100% - 50px);
+        background-color: #093d82;
+        display: block;
+        overflow-y: scroll;
+}
+
+.group-chat-section-member {
+        width: 100%;
+        background-color: rgb(9, 9, 126);
+}
+
+.group-chat-text-input {
+        position: fixed;
+        width: 100%;
+        bottom: 0px;
+        height: 50px;
+        /* left: 40px; */
+
+        background-color: black;
+        text-align: left;
+        * {
+                font-size: 24px;
+        }
 }

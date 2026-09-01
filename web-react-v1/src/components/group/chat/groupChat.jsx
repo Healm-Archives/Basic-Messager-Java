@@ -7,45 +7,45 @@ const GroupChat = ({group}) => {
         
         const [ toggleGroupChat, setToggleGroupChat ] = useState(false);
 
-        const sendChatApi =  async () => {
+        // const sendChatApi =  async () => {
                                  
-                await api.post("/message/send", {
-                        content: document.getElementById("chatInput").value,
-                        userUuid: userUuid,
-                        groupUuid: group.groupUuid,
-                        timestamp: new Date().toISOString()
-                }, {
-                        headers: {
-                                Authorization: `Bearer ${token}`
-                        }
-                })
-                .then(res => {
+        //         await api.post("/message/send", {
+        //                 content: document.getElementById("chatInput").value,
+        //                 userUuid: userUuid,
+        //                 groupUuid: group.groupUuid,
+        //                 timestamp: new Date().toISOString()
+        //         }, {
+        //                 headers: {
+        //                         Authorization: `Bearer ${token}`
+        //                 }
+        //         })
+        //         .then(res => {
 
-                })
-                .catch(error => {
-                        console.log(error.response.data);
+        //         })
+        //         .catch(error => {
+        //                 console.log(error.response.data);
                         
-                });
-        }
+        //         });
+        // }
 
-        const getChatApi = async () => {
+        // const getChatApi = async () => {
 
-                await api.post("/messages/get", {
-                        groupUuid: group.groupUuid
-                }, {
-                        headers: {
-                                Authorization: `Bearer ${token}`
-                        }
-                })
-                .then(res => {
-                        console.log(res.data);
+        //         await api.post("/messages/get", {
+        //                 groupUuid: group.groupUuid
+        //         }, {
+        //                 headers: {
+        //                         Authorization: `Bearer ${token}`
+        //                 }
+        //         })
+        //         .then(res => {
+        //                 console.log(res.data);
                         
-                })
-                .catch(error => {
-                        console.log(error.response.data);
+        //         })
+        //         .catch(error => {
+        //                 console.log(error.response.data);
                         
-                });
-        }
+        //         });
+        // }
 
         const OnToggleGroupChat = () => {
                 setToggleGroupChat(state => !state)

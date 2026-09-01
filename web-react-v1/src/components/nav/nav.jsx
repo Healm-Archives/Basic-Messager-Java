@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
-import Logout from "../logout/logout";
+import { useAuth } from "../auth/authConfig";
 
 const Nav = () => {
-        return (
-                <div className = "App-section">
+
+        const { username } = useAuth();
+
+        return (!username && 
+                <div>
                         <Link to = "/home">Home</Link> |{" "}
                         <Link to = "/login">Login</Link> |{" "}
                         <Link to = "/register">Register</Link> |{" "}
-                        <Logout />
                         <br/>
                 </div>
         );
 }
 
-export default Nav;
+export default Nav
