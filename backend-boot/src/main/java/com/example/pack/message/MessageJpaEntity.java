@@ -22,12 +22,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "message")
 public class MessageJpaEntity {
         @Id
-        @GeneratedValue(strategy = GenerationType.UUID)
+        @GeneratedValue
         @Column(
-                name = "message_uuid",
-                unique = true
+                name = "message_uuid"
         )
-        private UUID uuid;
+        private Integer uuid;
         
         @Column(
                 name = "user_uuid"
