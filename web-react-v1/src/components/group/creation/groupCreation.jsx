@@ -38,11 +38,8 @@ const GroupCreation = () => {
         return (
         <>
                 <button onClick={toggleCreateGroup}>Create new group</button>
-
-                <br/>
                 
-                {
-                createGroup && (
+                {createGroup && (
                         <div className="floating-panel">
 
                                 <form action = {OnCreateGroup}>

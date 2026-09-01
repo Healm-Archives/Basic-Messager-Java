@@ -54,7 +54,6 @@ const GroupSeach = () => {
 
         return (<>
                 <button onClick={groupSearchToggle}>Search</button>
-                <br/>
                 
                 {searchGroups && 
                         <div  className="floating-panel">
