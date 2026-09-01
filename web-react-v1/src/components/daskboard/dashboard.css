@@ -9,7 +9,7 @@
         justify-items: center;
         font-size: 16px;
         
-        * {
+        button {
                 font-size: 24px;
 
         }
@@ -35,5 +35,14 @@
 .search-result {
         width: 80%;
         background-color: #343434;
+
+}
+
+.group-list-section {
+        position: fixed;
+        top: 0px;
+        width: 30%;
+        height: 100%;
+        background-color: #09346b;
 
 }
