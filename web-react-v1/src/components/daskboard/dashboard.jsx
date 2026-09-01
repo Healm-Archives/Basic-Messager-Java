@@ -9,13 +9,17 @@ import GroupLeave from "../group/leave/groupLeave";
 import GroupSeach from "../group/search/groupSearch";
 import GroupEdit from "../group/edit/groupEdit";
 import GroupChat from "../group/chat/groupChat";
+import Logout from "../logout/logout";
 
 const Dashboard = () => {
 
         const { token, username, userUuid } = useAuth();
         const navigate = useNavigate();
 
-        const [joinedGroups, setJoinedGroups] = useState([]);
+        const [ joinedGroups, setJoinedGroups ] = useState([]);
+
+        const [ currentGroup, setCurrentGroup ] = useState();
+        const [ groupChatList, setGroupChatList ] = useState([]);
 
         const getJoinedGroupsApi = async () => {
                 await api.post(`/groups/joined`, 
@@ -51,21 +55,130 @@ const Dashboard = () => {
                         <GroupJoin group = {group} />
                         <GroupLeave group = {group} />
                         <GroupEdit group={group} />
-                        <GroupChat group = {group} />
+                        {/* <GroupChat group = {group} /> */}
                         <br/>
                 </>
                 )
         });
 
+        const OnClickGroup = (group) => {
+                setCurrentGroup(group);
+                // console.log("clicked group : " + group.groupName);
+                getChatApi(group);
+        }
+
+        const getChatApi = async (group) => {
+
+                await api.post("/messages/get", {
+                        groupUuid: group.groupUuid
+                }, {
+                        headers: {
+                                Authorization: `Bearer ${token}`
+                        }
+                })
+                .then(res => {
+                        setGroupChatList(res.data);
+                        console.log(res.data);
+                        
+                })
+                .catch(error => {
+                        console.log(error.response.data);
+                        
+                });
+        }
+
+        const GroupListSection2 = () => {
+                const groupList = joinedGroups.map(group => {
+                        return (<>
+                                <div className = "group-list-section-member" onClick={() => OnClickGroup(group)}>
+                                        {group.groupName}
+                                </div>
+                                <></>
+                                {/* <GroupEdit group = {group} /> */}
+                                {/* <GroupChat group = {group} /> */}
+                        </>)
+                });
+
+                return (<>
+                        <div className="group-list-section">
+                                Welcome, {username}
+                                <Logout />
+                                <GroupSeach /> 
+                                <GroupCreation />
+                                <br />
+                                <br />
+                                
+                                {groupList}
+                        </div>
+                        <></>
+                </>);
+        };
+
+
+        const GroupChatSection = () => {
+                const groupChatListMember = groupChatList.map(gc => {
+                        return (<>
+                                <div className="group-chat-section-member">
+                                        {gc.userUuid} : {gc.content} : {gc.timestamp}
+                                </div>
+                                <></>
+                        </>);
+                });
+
+                return (<>
+                        <div className="group-chat-section">
+                                {groupChatListMember}
+                                <br />
+
+                                <form action={sendChatApi} className="group-chat-text-input">
+                                        {/* <label htmlFor="chatInput">
+                                                Type here: 
+                                        </label> */}
+                                        <input
+                                                id = "chatInput"
+                                                name = "chatInput"
+                                                type = "text"
+                                                placeholder="Type message here"
+                                                required
+                                        />
+                                        <input
+                                                id = "submit"
+                                                name = "submit"
+                                                type = "submit"
+                                        />
+                                </form>
+                        </div>
+                        <></>
+                </>);
+        }
+
+        const sendChatApi =  async () => {
+                                 
+                await api.post("/message/send", {
+                        content: document.getElementById("chatInput").value,
+                        userUuid: userUuid,
+                        groupUuid: currentGroup.groupUuid,
+                        timestamp: new Date().toISOString()
+                }, {
+                        headers: {
+                                Authorization: `Bearer ${token}`
+                        }
+                })
+                .then(res => {
+
+                })
+                .catch(error => {
+                        console.log(error.response.data);
+                        
+                });
+        }
+
         return (
         <>
-                Welcome, {username}
+                <GroupListSection2 />
+                <GroupChatSection />
+                {/* {groupListSection} */}
                 <br/>
-                {/* My Group Name: <br/> */}
-                {groupListSection}
-                <br/>
-                <GroupSeach /> <br/>
-                <GroupCreation />
         </>
         );
 
