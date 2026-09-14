@@ -35,14 +35,48 @@
         width: 85%;
         height: calc(100% - 50px);
         background-color: #093d82;
-        display: block;
         overflow-y: scroll;
-}
+        
+        /* display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start; */
+        
+        padding-top: 5px;
 
-.group-chat-section-member {
-        width: 100%;
-        background-color: rgb(9, 9, 126);
-        height: 35px;
+        .group-chat-section-member {
+                width: 100%;
+                /* background-color: rgb(9, 9, 126); */
+                height: auto;
+                text-align: left;
+
+                display: flex;
+                align-items: flex-start;
+
+                img#profile-picture {
+                        height: 45px;
+                        width: 35px;
+                }
+
+                .group-chat-data {
+                        margin: 5px 0px 10px 10px;
+                        display: flex;
+                        flex-direction: column;
+                        
+                        .group-chat-timestamp {
+                                /* background-color: green; */
+                                width: fit-content;
+                                font-size: 12px;
+                                height: min-content;
+                                line-height: 12px;
+                        }
+                        .group-chat-text {
+                                /* background-color: rgb(2, 56, 2); */
+                                width: fit-content;
+                        }
+                }
+
+        }
 }
 
 .group-chat-text-input {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../api/axiosConfig";
-import { useAuth } from "../auth/authConfig";
+import { useAuth } from "../../config/auth/authConfig";
 import { useNavigate } from "react-router-dom";
 import GroupCreation from "../group/creation/groupCreation";
 import "./dashboard.css";
@@ -48,18 +48,18 @@ const Dashboard = () => {
                 getJoinedGroupsApi();
         }, []);
 
-        const groupListSection = joinedGroups.map(group => {
-                return (
-                <>
-                        {group.groupName}
-                        <GroupJoin group = {group} />
-                        <GroupLeave group = {group} />
-                        <GroupEdit group={group} />
-                        {/* <GroupChat group = {group} /> */}
-                        <br/>
-                </>
-                )
-        });
+        // const groupListSection = joinedGroups.map(group => {
+        //         return (
+        //         <>
+        //                 {group.groupName}
+        //                 <GroupJoin group = {group} />
+        //                 <GroupLeave group = {group} />
+        //                 <GroupEdit group={group} />
+        //                 {/* <GroupChat group = {group} /> */}
+        //                 <br/>
+        //         </>
+        //         )
+        // });
 
         const OnClickGroup = (group) => {
                 setCurrentGroup(group);
@@ -117,9 +117,31 @@ const Dashboard = () => {
 
         const GroupChatSection = () => {
                 const groupChatListMember = groupChatList.map(gc => {
+                        // if (Date.now() - Date.parse(gc.timestamp) > 24 * 60 * 60 * 1000){
+                        //         console.log(gc.content, "old");
+                        // } else {
+                        //         console.log(gc.content, "new");
+                        // }
+
                         return (<>
                                 <div className="group-chat-section-member">
-                                        {gc.userUuid} : {gc.content} : {gc.timestamp}
+                                        {/* {gc.userUuid}  */}
+                                        {/* {gc.name} : {gc.content} : {gc.timestamp} */}
+                                        <img src="/src/assets/react.svg" id="profile-picture" alt="harusnya ad gbr sni" />
+                                        <div className="group-chat-data">
+                                                <div className="group-chat-timestamp">
+                                                        01-01-2026
+                                                </div>
+                                                <div className="group-chat-text">
+                                                        {gc.content}
+                                                        {/* aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                        aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                        aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                        aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                        aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                        aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd */}
+                                                </div>
+                                        </div>
                                 </div>
                                 <></>
                         </>);
