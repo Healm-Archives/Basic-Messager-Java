@@ -1,82 +1,70 @@
-import { useState } from "react";
-import api from "../../../api/axiosConfig";
-import { useAuth } from "../../../config/auth/authConfig";
+const DAY = 24 * 60 * 60 * 1000;
 
-const GroupChat = ({group}) => {
-        const { token, userUuid } = useAuth();
+const GroupChat = ({currentGroup, groupChatList, OnSendMessages}) => {
         
-        const [ toggleGroupChat, setToggleGroupChat ] = useState(false);
+        const groupChatListMember = groupChatList.map(gc => {
+                let currentTime;
+                const thisTimestamp = new Date(gc.timestamp);
 
-        // const sendChatApi =  async () => {
-                                 
-        //         await api.post("/message/send", {
-        //                 content: document.getElementById("chatInput").value,
-        //                 userUuid: userUuid,
-        //                 groupUuid: group.groupUuid,
-        //                 timestamp: new Date().toISOString()
-        //         }, {
-        //                 headers: {
-        //                         Authorization: `Bearer ${token}`
-        //                 }
-        //         })
-        //         .then(res => {
+                if (Date.now() - Date.parse(gc.timestamp) > 1 * DAY){
+                        currentTime = `${thisTimestamp.getDate()}-${thisTimestamp.getMonth() + 1}-${thisTimestamp.getFullYear()}`
+                } else {
+                        currentTime = `${thisTimestamp.getHours()}-${thisTimestamp.getMinutes()}`
+                }
 
-        //         })
-        //         .catch(error => {
-        //                 console.log(error.response.data);
-                        
-        //         });
-        // }
-
-        // const getChatApi = async () => {
-
-        //         await api.post("/messages/get", {
-        //                 groupUuid: group.groupUuid
-        //         }, {
-        //                 headers: {
-        //                         Authorization: `Bearer ${token}`
-        //                 }
-        //         })
-        //         .then(res => {
-        //                 console.log(res.data);
-                        
-        //         })
-        //         .catch(error => {
-        //                 console.log(error.response.data);
-                        
-        //         });
-        // }
-
-        const OnToggleGroupChat = () => {
-                setToggleGroupChat(state => !state)
-        }
+                return (<>
+                        <div className="group-chat-section-member">
+                                {/* {gc.userUuid}  */}
+                                {/* {gc.name} : {gc.content} : {gc.timestamp} */}
+                                <img src="/src/assets/react.svg" id="profile-picture" alt="harusnya ad gbr sni" />
+                                <div className="group-chat-data">
+                                        <div className="group-chat-identifier">
+                                                
+                                                <div className="group-chat-username">{gc.name}</div>
+                                                <div className="group-chat-timestamp">{currentTime}</div>
+                                                
+                                        </div>
+                                        <div className="group-chat-text">
+                                                {gc.content}
+                                                {/* aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd
+                                                aadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasdaadasdasd */}
+                                        </div>
+                                </div>
+                        </div>
+                        <></>
+                </>);
+        });
 
         return (<>
-                <button onClick={OnToggleGroupChat}>Chat</button>
+                <div className="group-chat-section">
+                        {groupChatListMember}
+                        <br />
 
-                {toggleGroupChat && 
-                        <>
-                                <form action={sendChatApi}>
-                                        <label htmlFor="chatInput">
-                                                Type here: 
-                                        </label>
-                                        <input
-                                                id = "chatInput"
-                                                name = "chatInput"
-                                                type = "text"
-                                                required
-                                        />
-                                        <input
-                                                id = "submit"
-                                                name = "submit"
-                                                type = "submit"
-                                        />
-                                </form>
-
-                                <button onClick={getChatApi}>Refresh</button>
-                        </>
-                }
+                        <form action={() => OnSendMessages(currentGroup)} className="group-chat-text-input">
+                                {/* <label htmlFor="chatInput">
+                                        Type here: 
+                                </label> */}
+                                <input
+                                        id = "chatInput"
+                                        name = "chatInput"
+                                        type = "text"
+                                        placeholder="Type message here"
+                                        required
+                                />
+                                <input
+                                        id = "submit"
+                                        name = "submit"
+                                        type = "submit"
+                                />
+                        </form>
+                </div>
+                <></>
         </>);
+        
 
 }
 
