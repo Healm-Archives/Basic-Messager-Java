@@ -78,7 +78,7 @@ const Dashboard = () => {
                 })
                 .then(res => {
                         setGroupChatList(res.data);
-                        console.log(res.data);
+                        // console.log(res.data);
                         
                 })
                 .catch(error => {
@@ -117,11 +117,14 @@ const Dashboard = () => {
 
         const GroupChatSection = () => {
                 const groupChatListMember = groupChatList.map(gc => {
-                        // if (Date.now() - Date.parse(gc.timestamp) > 24 * 60 * 60 * 1000){
-                        //         console.log(gc.content, "old");
-                        // } else {
-                        //         console.log(gc.content, "new");
-                        // }
+                        let currentTime;
+                        if (Date.now() - Date.parse(gc.timestamp) > 24 * 60 * 60 * 1000){
+                                // console.log(gc.content, "old");
+                                currentTime = `${new Date(gc.timestamp).getDate()}-${new Date(gc.timestamp).getMonth() + 1}-${new Date(gc.timestamp).getFullYear()}`
+                        } else {
+                                // console.log(gc.content, "new");
+                                currentTime = `${new Date(gc.timestamp).getHours()}-${new Date(gc.timestamp).getMinutes()}`
+                        }
 
                         return (<>
                                 <div className="group-chat-section-member">
@@ -129,8 +132,11 @@ const Dashboard = () => {
                                         {/* {gc.name} : {gc.content} : {gc.timestamp} */}
                                         <img src="/src/assets/react.svg" id="profile-picture" alt="harusnya ad gbr sni" />
                                         <div className="group-chat-data">
-                                                <div className="group-chat-timestamp">
-                                                        01-01-2026
+                                                <div className="group-chat-identifier">
+                                                        
+                                                        <div className="group-chat-username">{gc.name}</div>
+                                                        <div className="group-chat-timestamp">{currentTime}</div>
+                                                        
                                                 </div>
                                                 <div className="group-chat-text">
                                                         {gc.content}
@@ -187,7 +193,7 @@ const Dashboard = () => {
                         }
                 })
                 .then(res => {
-
+                        getChatApi(currentGroup)
                 })
                 .catch(error => {
                         console.log(error.response.data);
