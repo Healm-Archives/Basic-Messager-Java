@@ -7,7 +7,7 @@ database: postgres
 ---
 
 TO-DO:
-        - add ui for group chat
+        ^ add ui for group chat
                 - user can be active on 1 group only
                 - render the chat dialog with id in ascending order
 
