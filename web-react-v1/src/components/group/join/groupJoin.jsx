@@ -1,5 +1,5 @@
 import api from "../../../api/axiosConfig";
-import { useAuth } from "../../auth/authConfig";
+import { useAuth } from "../../../config/auth/authConfig";
 
 const GroupJoin = ({group}) => {
 

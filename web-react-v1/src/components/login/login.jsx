@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axiosConfig.jsx";
-import { useAuth } from "../auth/authConfig.jsx";
+import { useAuth } from "../../config/auth/authConfig.jsx";
 
 // export const action = async ({request}) => {
 //         const formData = await request.formData;
