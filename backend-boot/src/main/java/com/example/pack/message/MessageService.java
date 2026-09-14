@@ -22,12 +22,12 @@ public class MessageService {
         }
 
         public List<MessageChatDto> getAllMessagesInGroup(MessageGroupDto groupDto) {
+                return messageRepository.findAllByGroupUuid2(groupDto.groupUuid());
                 // return messageRepository.findAllByGroupUuid(groupDto.groupUuid())
-                return messageRepository.findAllByGroupUuid2(groupDto.groupUuid())
                         // .stream()
                         // .map(messageMapper::toChatDto)
                         // .toList()
-                        ;
+                        // ;
         }
 
 }
