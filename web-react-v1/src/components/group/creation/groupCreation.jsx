@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../../../api/axiosConfig";
-import { useAuth } from "../../auth/authConfig";
+import { useAuth } from "../../../config/auth/authConfig";
 import "./groupCreation.css";
 
 const GroupCreation = () => {
